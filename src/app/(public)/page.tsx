@@ -1,11 +1,15 @@
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default function Home() {
+export default async function Home() {
+  // const { user } = useUser()
+  const user =await currentUser()
+  console.log(user?.id);
+  
   return (
     <div className="flex justify-center items-center">
-      <SignedIn>
-        <UserButton/>
-      </SignedIn>
+      <h1 className="text-4xl text-green-950">{user ? 'Dashboard' : 'Login'}</h1>
     </div>
   );
 }
