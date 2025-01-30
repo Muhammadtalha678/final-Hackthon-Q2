@@ -11,12 +11,18 @@
   "dependencies": {
     "@clerk/nextjs": "^6.10.0",
     "@radix-ui/react-separator": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.72.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.473.0",
     "next": "15.1.6",
+    "next-sanity": "^9.8.46",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sanity": "^3.72.1",
+    "styled-components": "^6.1.14",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
