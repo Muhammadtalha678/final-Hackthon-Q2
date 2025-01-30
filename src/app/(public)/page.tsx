@@ -3,7 +3,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Home() {
-  // const { user } = useUser()
   const user =await currentUser()
   console.log(user?.id);
   
