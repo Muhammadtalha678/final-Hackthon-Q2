@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Shop = () => {
+const Shop = async () => {
+  // const response = await fetch() 
   return (
     <div>
       
