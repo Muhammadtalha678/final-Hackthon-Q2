@@ -3,6 +3,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { Menu, ShoppingCart, Heart, User } from "lucide-react";
 import SearchCompo from "@/components/common/Header/Search";
+import { navLink } from "@/lib/link";
+import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,17 +28,24 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
-          <a href="#" className="text-gray-800 hover:text-gray-500">Home</a>
-          <a href="#" className="text-gray-800 hover:text-gray-500">Shop</a>
-          <a href="#" className="text-gray-800 hover:text-gray-500">Blog</a>
-          <a href="#" className="text-gray-800 hover:text-gray-500">Contact</a>
+          {
+            navLink.map((nav, index) => (
+               <Link key={index} href={nav.path} className="text-gray-800 hover:text-gray-500">{nav.name}</Link>
+            ))
+          } 
         </nav>
 
         {/* Icons (Desktop) */}
         <div className="hidden lg:flex items-center space-x-6">
+          <SignedIn>
+            <UserButton/>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton/>
+          </SignedOut>
           <User className="w-6 h-6 cursor-pointer" />
           <Heart className="w-6 h-6 cursor-pointer" />
-          <ShoppingCart className="w-6 h-6 cursor-pointer" />
+          <Link href='/cart'>< ShoppingCart className="w-6 h-6 cursor-pointer" /></Link>
         </div>
 
         {/* Hamburger Button (Mobile) */}
@@ -63,7 +74,7 @@ const Navbar = () => {
           <div className="flex space-x-6 mt-4 justify-center">
             <User className="w-6 h-6 cursor-pointer" />
             <Heart className="w-6 h-6 cursor-pointer" />
-            <ShoppingCart className="w-6 h-6 cursor-pointer" />
+            <Link href='/cart'>< ShoppingCart className="w-6 h-6 cursor-pointer" /></Link>
           </div>
         </nav>
       )}
