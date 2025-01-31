@@ -8,15 +8,21 @@ const Shop = async () => {
     
   }
 
-  const response = await fetch(`${process.env.base_url}/api/product`)
+  const response = await fetch(`http://localhost:3000/api/product`)
   if (!response.ok) {
-    throw new Error("Some thing wen wrong");
+    throw new Error("Some thing went wrong");
     
   }
   // create the responsse interface 
   const {error,message,data}:{error:boolean,message:string,data:Product[]} = await response.json()
+  console.log(error,message);
   
-  console.log(data);
+  if (error) {
+    console.log("error",error);
+    
+    throw new Error(message);
+    
+  }
   
   
   return (

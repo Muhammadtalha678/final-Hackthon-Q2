@@ -12,19 +12,24 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
+      <div className="relative">
       <Image src={urlFor(product.thumbnail).url()} alt={product.name} width={300} height={300} className="w-full h-64 object-cover" />
 
       {/* Discount or New Label */}
-      {product.discountPrice > 0 && (
-        <span className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+      <div className="absolute top-4  flex justify-between items-center w-full  px-2">
+         {product.discountPrice > 0 && (
+        <span className=" bg-red-500 text-white text-xs px-2 py-1 rounded-full">
           {discountPercentage(product.price,product.discountPrice)}
         </span>
       )}
-      {/* {product.isNew && (
-        <span className="absolute top-3 right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+      {product.isNew && (
+        <span className=" bg-green-500 text-white text-xs px-2 py-1 rounded-full">
           New
         </span>
-      )} */}
+      )}
+
+      </div>
+     </div>
 
       {/* Hover Overlay (Now controlled via group-hover) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
