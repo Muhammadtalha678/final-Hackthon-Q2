@@ -2,9 +2,9 @@ import ProductListing from '@/components/Product/ProductListing';
 import { Product } from '@/interfaces/Product';
 import React from 'react'
 // {searchParamas}:{searchParamas:Promise<{q:string}>}
-const Shop = async ({ searchParams }: { searchParams:{ [key: string]: string | string[] | undefined } }) => {
+const Shop = async ({searchParams}:{searchParams:Promise<{[id:string]:string | string[] | undefined}>}) => {
 // const Shop = async ({searchParam}:{searchParam:Promise<{q:string}>}) => {
-  const page = searchParams.page || '1' 
+  const {page} = await searchParams 
   console.log(page);
   
   if (!process.env.NEXT_PUBLIC_BASE_URL) {
