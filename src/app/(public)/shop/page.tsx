@@ -7,12 +7,12 @@ const Shop = async ({ searchParams }: { searchParams:{ [key: string]: string | s
   const page = searchParams.page || '1' 
   console.log(page);
   
-  if (!process.env.base_url) {
+  if (!process.env.NEXT_PUBLIC_BASE_URL) {
     throw new Error("Base Url is not given!.");
     
   }
 
-  const response = await fetch(`${process.env.base_url}/api/product`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`)
   if (!response.ok) {
     throw new Error("Some thing went wrong");
     
