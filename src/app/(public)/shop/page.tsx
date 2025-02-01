@@ -1,14 +1,18 @@
 import ProductListing from '@/components/Product/ProductListing';
 import { Product } from '@/interfaces/Product';
 import React from 'react'
-
-const Shop = async () => {
+// {searchParamas}:{searchParamas:Promise<{q:string}>}
+const Shop = async ({ searchParams }: { searchParams:{ [key: string]: string | string[] | undefined } }) => {
+// const Shop = async ({searchParam}:{searchParam:Promise<{q:string}>}) => {
+  const page = searchParams.page || '1' 
+  console.log(page);
+  
   if (!process.env.base_url) {
     throw new Error("Base Url is not given!.");
     
   }
 
-  const response = await fetch(`http://localhost:3000/api/product`)
+  const response = await fetch(`${process.env.base_url}/api/product`)
   if (!response.ok) {
     throw new Error("Some thing went wrong");
     

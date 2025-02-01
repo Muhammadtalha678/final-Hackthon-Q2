@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const response = await client.fetch("ALL_PRODUCT_QUERY")
+        const response = await client.fetch(ALL_PRODUCT_QUERY)
         if (!response) {
             return NextResponse.json({
                 error:true,message:"Error Fetching Data",data:response
