@@ -1,7 +1,6 @@
 import { Product } from '@/interfaces/Product'
 import React from 'react'
 import ProductCard from './ProductCard'
-import Pagination from '../Pagination'
 
  
 

@@ -8,7 +8,7 @@ import Services from '@/components/resuable/Services';
 
 const Shop = async ({ searchParams,params }:
   { searchParams: Promise<{ [id: string]: string | string[] | undefined }>,params:Promise<{id:string}> }) => {
-  const { page } = await searchParams
+  // const { page } = await searchParams
   const { id } = await params
   
   
