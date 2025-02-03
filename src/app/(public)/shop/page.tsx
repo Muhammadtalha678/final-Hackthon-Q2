@@ -1,11 +1,18 @@
 import ProductListing from '@/components/Product/ProductListing';
+import { Hero2 } from '@/components/resuable/Hero2';
 import { Product } from '@/interfaces/Product';
 import React from 'react'
-// {searchParamas}:{searchParamas:Promise<{q:string}>}
-const Shop = async ({searchParams}:{searchParams:Promise<{[id:string]:string | string[] | undefined}>}) => {
-// const Shop = async ({searchParam}:{searchParam:Promise<{q:string}>}) => {
-  const {page} = await searchParams 
-  console.log(page);
+import ProductToolbar from './Filter';
+import Pagination from '@/components/Pagination';
+import Services from '@/components/resuable/Services';
+
+const Shop = async ({ searchParams,params }:
+  { searchParams: Promise<{ [id: string]: string | string[] | undefined }>,params:Promise<{id:string}> }) => {
+  const { page } = await searchParams
+  const { id } = await params
+  
+  
+  console.log(id);
   
   if (!process.env.NEXT_PUBLIC_BASE_URL) {
     throw new Error("Base Url is not given!.");
@@ -32,11 +39,23 @@ const Shop = async ({searchParams}:{searchParams:Promise<{[id:string]:string | s
   return (
 
     <div>
+       <Hero2
+                title="Shop"
+                backgroundImage="/images/hero2.jpg"
+                links={[
+                    { name: "Home", href: "/" },
+                    { name: "Shop", href: "/shop" },
+                ]}
+      />
+      <ProductToolbar/>
       {
         data.length > 0 ?
           <ProductListing products={data}/>  
           : <h1>Product Not Found</h1>
       }  
+      <Pagination />
+      
+      <Services/>
     </div>
   )
 }

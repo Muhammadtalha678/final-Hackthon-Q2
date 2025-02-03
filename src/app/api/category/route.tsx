@@ -5,6 +5,12 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         const response = await client.fetch(ALL_CATEGORY_QUERY)
+        if (!response) {
+            return NextResponse.json({
+                error:true,message:"Error Fetching Data",data:response
+            })
+            
+        }
         return NextResponse.json({
             error:false,message:"Data Fetch Successfully",data:response
         })

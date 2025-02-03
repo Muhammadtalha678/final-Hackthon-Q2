@@ -7,9 +7,12 @@ import { navLink } from "@/lib/link";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
-
+import {usePathname} from 'next/navigation'
+import clsx from "clsx";
 const Navbar = () => {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
+console.log(pathname);
 
   return (
     <header className="w-full bg-white shadow-md overflow-x-hidden">
@@ -30,7 +33,12 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           {
             navLink.map((nav, index) => (
-               <Link key={index} href={nav.path} className="text-gray-800 hover:text-gray-500">{nav.name}</Link>
+              <Link key={index} href={nav.path} className={clsx(
+                'text-gray-800 hover:text-[#e6b477]',
+                {'text-[#e6b477]':pathname === nav.path}
+              )}>
+                {nav.name}
+              </Link>
             ))
           } 
         </nav>
@@ -65,10 +73,11 @@ const Navbar = () => {
       {/* Mobile Menu (Hidden by default) */}
       {isOpen && (
         <nav className="lg:hidden bg-gray-100 py-4 px-6 space-y-4 text-center">
-          <a href="#" className="block text-gray-800 hover:text-gray-500">Home</a>
-          <a href="#" className="block text-gray-800 hover:text-gray-500">Shop</a>
-          <a href="#" className="block text-gray-800 hover:text-gray-500">Blog</a>
-          <a href="#" className="block text-gray-800 hover:text-gray-500">Contact</a>
+          {
+            navLink.map((nav, index) => (
+               <Link key={index} href={nav.path} className="block text-gray-800 hover:text-gray-500">{nav.name}</Link>
+            ))
+          }
 
           {/* Mobile Icons */}
           <div className="flex space-x-6 mt-4 justify-center">
