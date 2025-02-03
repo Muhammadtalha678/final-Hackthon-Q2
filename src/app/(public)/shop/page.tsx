@@ -6,13 +6,10 @@ import ProductToolbar from './Filter';
 import Pagination from '@/components/Pagination';
 import Services from '@/components/resuable/Services';
 
-const Shop = async ({ searchParams,params }:
-  { searchParams: Promise<{ [id: string]: string | string[] | undefined }>,params:Promise<{id:string}> }) => {
+const Shop = async () => {
   // const { page } = await searchParams
-  const { id } = await params
   
   
-  console.log(id);
   
   if (!process.env.NEXT_PUBLIC_BASE_URL) {
     throw new Error("Base Url is not given!.");
