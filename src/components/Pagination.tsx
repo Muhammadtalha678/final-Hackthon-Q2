@@ -1,44 +1,44 @@
-import React from 'react';
+'use client'
+import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+const Pagination = ({ totalPages }: { totalPages: number }) => {
+  const router = useRouter()
+  const searchParam = useSearchParams()
 
-const Pagination = () => {
+  const currentPage = searchParam.get('page') || '1'
+  const perPage = searchParam.get('perPage') || '8'
   return (
     <nav aria-label="Page navigation example" className="flex justify-center mb-10">
-      <ul className="inline-flex items-center -space-x-px text-sm">
+      <ul className="inline-flex items-center space-x-2 text-sm">
+        {
+          Number(currentPage) > 1 &&
+          <li>
+            <button onClick={() => router.push(`/shop?page=${Number(currentPage) - 1}&perPage=${perPage}`)}
+              className="flex items-center justify-center px-4 py-2 bg-[#F5F1EB] text-black font-medium rounded-md">
+              Prev
+            </button>
+          </li>
+        }
+
+        {
+          Array(totalPages).fill(null).map((_ele, ind) => (
+            <li key={ind}>
+              <button onClick={() => router.push(`/shop?page=${ind + 1}&perPage=${perPage}`)} className={`flex items-center justify-center px-4 py-2 font-medium rounded-md
+                 ${Number(currentPage) === ind + 1 ? 'bg-[#B08A47] text-white' : 'bg-[#F5F1EB] text-black'}`}>
+                {/* 'bg-[#B08A47] text-white':'"bg-[#F5F1EB] text-black' */}
+                {ind + 1}
+              </button>
+            </li>
+          ))
+        }
+
         <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            Previous
-          </a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            1
-          </a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            2
-          </a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
-            3
-          </a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            4
-          </a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            5
-          </a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <button onClick={() => router.push(`/shop?page=${Number(currentPage) + 1}&perPage=${perPage}`)} disabled={Number(currentPage) === totalPages}
+            className="flex items-center justify-center px-4 py-2 bg-[#F5F1EB] text-black font-medium rounded-md">
             Next
-          </a>
+          </button>
         </li>
+
       </ul>
     </nav>
   );

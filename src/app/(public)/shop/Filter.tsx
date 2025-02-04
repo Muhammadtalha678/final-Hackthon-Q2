@@ -1,16 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { List, Grid, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function ProductToolbar() {
+export default function ProductToolbar({ totalLength }: { totalLength: number }) {
+  const searchParam = useSearchParams()
+  const router = useRouter()
+
+  const currentPage = searchParam.get('page') || '1'
+  const perPage = searchParam.get('perPage') || '8'
+  const sortedBy = searchParam.get('sortBy') || 'default'
   const [view, setView] = useState<"grid" | "list">("grid");
-  const [itemsPerPage, setItemsPerPage] = useState("16");
-  const [sortBy, setSortBy] = useState("default");
+  const [itemsPerPage, setItemsPerPage] = useState(Number(perPage));
 
+  const [sortBy, setSortBy] = useState(sortedBy);
+
+
+  const startIndex = (Number(currentPage) - 1) * Number(perPage) + 1
+  //  (1-1)*8 + 1 => 0+1 = 1
+  //  (2-1)*8 + 1 => 8+1 = 9
+  const endIndex =
+    startIndex + Number(perPage) > totalLength ? totalLength : startIndex + Number(perPage) - 1
+  // 1       +        7        >      10     ?      10     : 1          +         7        - 1
+  // 8       +        7        >      10     ?      10    
+  useEffect(() => {
+    if (itemsPerPage !== 8) {
+      const timer = setTimeout(() => {
+        router.push(`/shop?page=${Number(currentPage)}&perPage=${itemsPerPage}`)
+      }, 200);
+
+      return () => clearTimeout(timer)
+    }
+
+  }, [itemsPerPage])
+  useEffect(() => {
+    if (sortBy !== 'default') {
+      const timer = setTimeout(() => {
+        router.push(`/shop?page=${Number(currentPage)}&perPage=${itemsPerPage}&sortBy=${sortBy}`)
+      }, 200);
+
+      return () => clearTimeout(timer)
+
+    }
+  }, [sortBy])
   return (
     <div className="flex items-center justify-between bg-[#f9f3eb] p-4 rounded-lg mb-10">
       {/* Left Section */}
@@ -30,7 +66,7 @@ export default function ProductToolbar() {
         </button>
 
         {/* Results Count */}
-        <span className="text-gray-600">Showing 1-{itemsPerPage} of 32 results</span>
+        <span className="text-gray-600">Showing {startIndex}-{endIndex} of {totalLength} results</span>
       </div>
 
       {/* Right Section */}
@@ -40,7 +76,13 @@ export default function ProductToolbar() {
         <Input
           type="number"
           value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(e.target.value)}
+          onChange={(e) => {
+            const value = Number(e.target.value)
+            if (value < 1) setItemsPerPage(1)
+            else if (value > totalLength) setItemsPerPage(10)
+            else
+              setItemsPerPage(Number(e.target.value));
+          }}
           className="w-16 text-center"
         />
 

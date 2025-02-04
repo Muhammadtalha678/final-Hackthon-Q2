@@ -13,18 +13,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
       <div className="relative">
-      <Image 
-  src={urlFor(product.thumbnail).url()} 
-  alt={product.name} 
-  width={500} // Increase resolution
-  height={500}
-  className="w-full h-64 object-cover"
-  quality={100} // Ensures the highest quality
-  priority // Improves loading speed and sharpness
-  unoptimized // Disables Next.js optimization (optional, test with and without)
-  loading="lazy" // Ensures better performance
-/>
-
+      <Image src={urlFor(product.thumbnail).url()} alt={product.name} width={500} height={500} className="w-full h-64 object-cover" />
 
       {/* Discount or New Label */}
       <div className="absolute top-4  flex justify-between items-center w-full  px-2">
