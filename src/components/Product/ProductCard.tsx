@@ -6,30 +6,54 @@ import { urlFor } from '@/sanity/lib/image';
 import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
 import { useEffect, useState } from 'react';
-import { cartObject } from '@/lib/object';
+import { cartObject, wishListObject } from '@/lib/object';
+import { useWishList } from '@/context/WishListContext';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
+  // import cart form cartContext
   const { addProdToCart, cart } = useCart()
+
+  // import wish list from wihsList context
+  const { addProdToWishList, wishList } = useWishList()
+
+  // use the state varables to track any change in cart add the addedtocart become true
+  // and by which the user cannot add that product more times to cart where productCard use   
   const [addedToCart, setAddedToCart] = useState(false)
 
-  //hndleCart send prod tocart obj for the first time
+  //for wish list same above guide line
+  const [addedToWishList, setAddedToWishList] = useState(false)
+
+
+
+  //hndleCart send prod to cart obj for the first time
   const handleCart = () => {
     const obj = cartObject(product)
     addProdToCart(obj)
-    setAddedToCart(true)
   }
 
-  //hndlewishList send prod to wishlist obj for the first time
-  // run useeffect to check if something in cart or wishlist
+  //hndleWishList send prod to WishList obj for the first time
+  const handleWishList = () => {
+    const obj = wishListObject(product)
+    addProdToWishList(obj)
+  }
+
+  // run useeffect to check if something in cart when add or run first time
   useEffect(() => {
-    // this find the cart item or wish list whether it is  for first time happens in wishList or cart
-    // or adding to cart or wish list
     const cartItem = cart.find((cartItem) => cartItem.productId === product._id)
     if (cartItem) {
       setAddedToCart(true)
     }
   }, [cart])
+
+  // run useeffect to check if something in WishList when add or run first time
+  useEffect(() => {
+    const wishListItem = wishList.find((wishListItem) => wishListItem.productId === product._id)
+    if (wishListItem) {
+      setAddedToWishList(true)
+    }
+  }, [wishList])
+
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
@@ -69,8 +93,8 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button className="flex items-center gap-1 text-sm">
             <ShoppingCart size={16} /> Compare
           </button>
-          <button className="flex items-center gap-1 text-sm" >
-            <Heart size={16} /> Like
+          <button className="flex items-center gap-1 text-sm" onClick={handleWishList} disabled={addedToWishList}>
+            <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
           </button>
         </div>
       </div>
