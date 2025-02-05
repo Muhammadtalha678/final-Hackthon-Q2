@@ -7,14 +7,12 @@ import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
 import { useWishList } from '@/context/WishListContext'
 import { useEffect, useState } from 'react';
-import { cartObject, wishListObject } from '@/lib/cartObject';
+import { cartObject } from '@/lib/cartObject';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { addProdToCart, cart } = useCart()
-  const { addProdToWishList, wishList } = useWishList()
   const [addedToCart, setAddedToCart] = useState(false)
-  const [addedToWishList, setAddedToWishList] = useState(false)
 
   //hndleCart send prod tocart obj for the first time
   const handleCart = () => {
@@ -24,18 +22,12 @@ const ProductCard = ({ product }: { product: Product }) => {
   }
 
   //hndlewishList send prod to wishlist obj for the first time
-  const handleWishList = () => {
-    const obj = wishListObject(product)
-    addProdToWishList(obj)
-    setAddedToWishList(true)
-  }
   // run useeffect to check if something in cart or wishlist
   useEffect(() => {
     // this find the cart item or wish list whether it is  for first time happens in wishList or cart
     // or adding to cart or wish list  
     cart.find((cartItem) => cartItem.productId === product._id) && setAddedToCart(true)
-    wishList.find((wishListItem) => wishListItem.productId === product._id) && setAddedToWishList(true)
-  }, [cart, wishList])
+  }, [cart])
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
@@ -75,9 +67,8 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button className="flex items-center gap-1 text-sm">
             <ShoppingCart size={16} /> Compare
           </button>
-          <button className="flex items-center gap-1 text-sm" onClick={handleWishList}
-            disabled={addedToWishList}>
-            <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
+          <button className="flex items-center gap-1 text-sm" >
+            <Heart size={16} /> Like
           </button>
         </div>
       </div>
