@@ -10,3 +10,12 @@ export const cartObject = (item: Cart | Product): Cart => {
         productQuantity: "productQuantity" in item ? item.productQuantity : 1,  //set 1 by default
     };
 };
+export const wishListObject = (item: Product) => {
+    return {
+        productId: item._id,
+        // productImage:  item.thumbnail,
+        // productName:  item.name,
+        // productPrice:  item.discountPrice > 0 ? item.discountPrice:item.price,
+        // productQuantity:  1,  //set 1 by default
+    };
+};
