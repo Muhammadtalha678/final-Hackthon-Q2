@@ -8,7 +8,6 @@ import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { usePathname } from 'next/navigation'
-import clsx from "clsx";
 import { useCart } from '@/context/CartContext'
 import { useWishList } from '@/context/WishListContext'
 import { motion } from 'framer-motion'
@@ -19,9 +18,9 @@ const Navbar = () => {
   const { wishList } = useWishList()
 
   return (
-    <header className="w-full bg-white shadow-md overflow-x-hidden">
+    <header className="w-full bg-white overflow-x-hidden">
       {/* Main Navbar */}
-      <div className="overflow-hidden bg-gold-500  py-2 sm:py-3">
+      <div className="overflow-hidden  py-2 sm:py-3">
         <motion.div
           className="flex items-center gap-2 whitespace-nowrap text-black text-lg md:text-xl font-semibold"
           animate={{ x: ["100%", "-100%"] }}
@@ -49,10 +48,13 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           {
             navLink.map((nav, index) => (
-              <Link key={index} href={nav.path} className={clsx(
-                'text-gray-800 hover:text-[#e6b477]',
-                { 'text-[#e6b477]': pathname === nav.path }
-              )}>
+              <Link key={index} href={nav.path}
+                //   className={clsx(
+                //   'text-gray-800 hover:text-[#e6b477]',
+                //   { 'text-[#e6b477]': pathname == nav.path }
+                // )}
+                className={`${pathname === nav.path ? 'text-[#e6b477]' : 'text-gray-800 hover:text-[#e6b477]'}`}
+              >
                 {nav.name}
               </Link>
             ))
@@ -107,7 +109,9 @@ const Navbar = () => {
         <nav className="lg:hidden bg-gray-100 py-4 px-6 space-y-4 text-center">
           {
             navLink.map((nav, index) => (
-              <Link key={index} href={nav.path} className="block text-gray-800 hover:text-gray-500">{nav.name}</Link>
+              <Link key={index} href={nav.path} className={`block ${pathname === nav.path ? 'text-[#e6b477]' : 'text-gray-800 hover:text-[#e6b477]'}`}>
+                {nav.name}
+              </Link>
             ))
           }
 
