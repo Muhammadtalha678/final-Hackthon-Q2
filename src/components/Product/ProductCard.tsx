@@ -6,7 +6,7 @@ import { urlFor } from '@/sanity/lib/image';
 import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
 import { useEffect, useState } from 'react';
-import { cartObject } from '@/lib/cartObject';
+import { cartObject } from '@/lib/object';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
