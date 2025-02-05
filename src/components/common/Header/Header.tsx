@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { Menu, ShoppingCart, Heart, User } from "lucide-react";
+import { Menu, ShoppingCart, Heart, User, ShoppingBag, Truck } from "lucide-react";
 import SearchCompo from "@/components/common/Header/Search";
 import { navLink } from "@/lib/link";
 import Link from "next/link";
@@ -10,14 +10,29 @@ import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { usePathname } from 'next/navigation'
 import clsx from "clsx";
 import { useCart } from '@/context/CartContext'
+import { useWishList } from '@/context/WishListContext'
+import { motion } from 'framer-motion'
 const Navbar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
   const { cart } = useCart()
+  const { wishList } = useWishList()
 
   return (
     <header className="w-full bg-white shadow-md overflow-x-hidden">
       {/* Main Navbar */}
+      <div className="overflow-hidden bg-gold-500  py-2 sm:py-3">
+        <motion.div
+          className="flex items-center gap-2 whitespace-nowrap text-black text-lg md:text-xl font-semibold"
+          animate={{ x: ["100%", "-100%"] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "linear" }} // ✅ Slower transition
+        >
+          <ShoppingBag className="w-6 h-6 inline-block" /> {/* 🛍️ Icon */}
+          Shop over <span className="font-bold">Rs. 10,000</span> & get{" "}
+          <span className="underline">Free Delivery!</span>
+          <Truck className="w-6 h-6 inline-block" /> {/* 🚚 Icon */}
+        </motion.div>
+      </div>
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo (Bigger & Always Visible) */}
         <div className="flex items-center">
@@ -53,7 +68,14 @@ const Navbar = () => {
             <SignInButton />
           </SignedOut>
           <User className="w-6 h-6 cursor-pointer" />
-          <Heart className="w-6 h-6 cursor-pointer" />
+          <div className="relative">
+            <Heart className="w-6 h-6 cursor-pointer" />
+
+            {/* Cart count badge */}
+            <span className="absolute -top-1 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              {wishList.length}
+            </span>
+          </div>
           <Link href="/cart" className="relative">
             <ShoppingCart className="w-6 h-6 cursor-pointer" />
 
@@ -92,7 +114,14 @@ const Navbar = () => {
           {/* Mobile Icons */}
           <div className="flex space-x-6 mt-4 justify-center">
             <User className="w-6 h-6 cursor-pointer" />
-            <Heart className="w-6 h-6 cursor-pointer" />
+            <div className="relative">
+              <Heart className="w-6 h-6 cursor-pointer" />
+
+              {/* Cart count badge */}
+              <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                {wishList.length}
+              </span>
+            </div>
             <Link href="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 cursor-pointer" />
 
