@@ -7,13 +7,20 @@ import { urlFor } from "@/sanity/lib/image";
 import { useCart } from '@/context/CartContext'
 import { cartObject } from "@/lib/cartObject";
 import { Cart } from "@/interfaces/Cart";
+import { useEffect, useState } from "react";
 
 const CartTable = () => {
     const { cart, addProdToCart, decreaseItemQuan, removeItem } = useCart();
+    const [total, setTotal] = useState(0)
+
     const handleCart = (item: Cart) => {
         const obj: Cart = cartObject(item)
         addProdToCart(obj)
     }
+    useEffect(() => {
+        const total = cart.reduce((total: number, item) => (total + (item.productPrice * item.productQuantity)), 0)
+        setTotal(total)
+    }, [cart])
     return (
         <div className="p-6 flex flex-col md:flex-row gap-8">
             {/* Cart Table */}
@@ -28,13 +35,15 @@ const CartTable = () => {
                     <div className="border-t my-2"></div>
                     {cart.map((cartItem, index) => (
                         <div key={index + 1} className="grid grid-cols-4 items-center gap-4 p-2">
-                            <Image
-                                width={20}
-                                height={20}
-                                src={urlFor(cartItem.productImage).url()}
-                                alt={cartItem.productName}
-                                className="w-16 h-16 object-cover rounded-lg"
-                            />
+                            {cartItem.productImage && (
+                                <Image
+                                    width={64}
+                                    height={64}
+                                    src={urlFor(cartItem.productImage).url() || "/placeholder.png"}
+                                    alt={cartItem.productName}
+                                    className="w-16 h-16 object-cover rounded-lg"
+                                />
+                            )}
                             {/* <span className="text-gray-500">{cartItem.productName}</span> */}
                             <span className="text-gray-500">Rs. {cartItem.productPrice}</span>
                             <span className="text-gray-500">{cartItem.productQuantity}</span>
@@ -42,7 +51,7 @@ const CartTable = () => {
                             <div className="flex items-center gap-2">
                                 <Button variant={'btnPrimary'} className="p-1" size="icon"
                                     onClick={() => decreaseItemQuan(cartItem.productId)}
-                                    disabled={cartItem.productQuantity === 1}>
+                                    disabled={cartItem.productQuantity <= 1}>
                                     <Minus className="w-4 h-4" />
                                 </Button>
                                 <span className="w-8 text-center">{cartItem.productQuantity}</span>
@@ -69,12 +78,24 @@ const CartTable = () => {
                     <h2 className="text-xl font-bold">Cart Totals</h2>
                     <div className="flex justify-between text-gray-500">
                         <span>Subtotal</span>
-                        <span>Rs. {cart.reduce((total: number, item) => (total + (item.productPrice * item.productQuantity)), 0)}</span>
+                        <span>Rs. {total}</span>
                     </div>
+                    {total >= 10000 ? (
+                        <div className="flex justify-center font-bold text-gold-500 text-lg">
+                            <span>Free Delivery</span>
+                        </div>
+                    ) : (
+                        <div className="flex justify-between font-bold text-gold-500 text-lg">
+                            <span>Delivery</span>
+                            <span>Rs. 200</span>
+                        </div>
+                    )}
                     <div className="flex justify-between font-bold text-gold-500 text-lg">
                         <span>Total</span>
-                        <span>Rs. {cart.reduce((total: number, item) => (total + (item.productPrice * item.productQuantity)), 0)}</span>
+                        <span>Rs. {total && (total >= 10000 ? total : total + 200)}</span>
                     </div>
+
+
                     <Button variant={'btnPrimary'} className="w-full  py-2 rounded-lg">
                         Check Out
                     </Button>
