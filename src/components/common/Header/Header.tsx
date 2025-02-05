@@ -6,11 +6,12 @@ import SearchCompo from "@/components/common/Header/Search";
 import { navLink } from "@/lib/link";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton, useClerk } from "@clerk/clerk-react";
 import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import { useWishList } from '@/context/WishListContext'
 import { motion } from 'framer-motion'
+import CustomUserButton from "@/components/Auth/CustomUserButton";
 const Navbar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
@@ -63,13 +64,13 @@ const Navbar = () => {
 
         {/* Icons (Desktop) */}
         <div className="hidden lg:flex items-center space-x-6">
+
           <SignedIn>
-            <UserButton />
+            <CustomUserButton />
           </SignedIn>
           <SignedOut>
             <SignInButton />
           </SignedOut>
-          <User className="w-6 h-6 cursor-pointer" />
           <div className="relative">
             <Heart className="w-6 h-6 cursor-pointer" />
 
@@ -117,7 +118,12 @@ const Navbar = () => {
 
           {/* Mobile Icons */}
           <div className="flex space-x-6 mt-4 justify-center">
-            <User className="w-6 h-6 cursor-pointer" />
+            <SignedIn>
+              <CustomUserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
             <div className="relative">
               <Heart className="w-6 h-6 cursor-pointer" />
 
