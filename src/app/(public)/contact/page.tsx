@@ -8,10 +8,6 @@ const Contact = () => {
       <Hero2
         title="Shop"
         backgroundImage="/images/hero2.jpg"
-        links={[
-          { name: "Home", href: "/" },
-          { name: "Contact", href: "/contact" },
-        ]}
       />
       <div className='text-center'>
 
