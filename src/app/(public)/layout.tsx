@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/common/Header/Header";
 import Footer from "@/components/common/Footer/Footer";
 import { poppins } from "@/lib/fonts";
+import { CartContextProvider } from "@/context/CartContext";
 
 
 
@@ -23,12 +24,16 @@ export default function RootLayout({
         className={poppins.className}
       >
         <ClerkProvider>
-          <div className="max-w-[1440px] mx-auto">
-          <Header />
-        {children}
-          <Footer/>
+          <CartContextProvider>
+            <div className="max-w-[1440px] mx-auto">
+              <Header />
+              {children}
+              <Footer />
 
-          </div>
+            </div>
+
+          </CartContextProvider>
+
         </ClerkProvider>
       </body>
     </html>

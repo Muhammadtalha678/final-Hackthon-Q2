@@ -1,10 +1,13 @@
+import CartTable from '@/components/cart/cartTable/cartTable'
+import Services from '@/components/resuable/Services'
 import React from 'react'
 
 const Cart = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <CartTable />
+      <Services />
+    </>
   )
 }
 
