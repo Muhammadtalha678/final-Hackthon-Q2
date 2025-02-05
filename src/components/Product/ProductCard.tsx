@@ -5,19 +5,38 @@ import { ShoppingCart, Heart, Share2 } from "lucide-react";
 import { urlFor } from '@/sanity/lib/image';
 import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
-import { cartObject } from '@/lib/cartObject';
+// import { useWishList } from '@/context/WishListContext'
+import { useEffect, useState } from 'react';
+import { cartObject, wishListObject } from '@/lib/cartObject';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { addProdToCart, cart } = useCart()
+  // const { addProdToWishList, wishList } = useWishList()
+  const [addedToCart, setAddedToCart] = useState(false)
+  const [addedToWishList, setAddedToWishList] = useState(false)
 
   //hndleCart send prod tocart obj for the first time
   const handleCart = () => {
     const obj = cartObject(product)
     addProdToCart(obj)
+    setAddedToCart(true)
   }
 
+  //hndlewishList send prod to wishlist obj for the first time
+  const handleWishList = () => {
+    const obj = wishListObject(product)
+    // addProdToWishList(obj)
+    setAddedToWishList(true)
+  }
 
+  // run useeffect to check if something in cart or wishlist
+  useEffect(() => {
+    // this find the cart item or wish list whether it is  for first time happens in wishList or cart
+    // or adding to cart or wish list  
+    cart.find((cartItem) => cartItem.productId === product._id) && setAddedToCart(true)
+    // wishList.find((wishListItem) => wishListItem.productId === product._id) && setAddedToWishList(true)
+  }, [cart])
 
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
@@ -45,10 +64,8 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 
 
-        <button className={`${cart.find((cartItem) => cartItem.productId === product._id) ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart}
-          disabled={cart.find((cartItem) => cartItem.productId === product._id) ? true : false}
-        >
-          {cart.find((cartItem) => cartItem.productId === product._id) ? "Added" : "Add to cart"}
+        <button className={`${addedToCart ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart} disabled={addedToCart}>
+          {addedToCart ? "Added" : "Add to cart"}
         </button>
 
 
@@ -60,10 +77,9 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button className="flex items-center gap-1 text-sm">
             <ShoppingCart size={16} /> Compare
           </button>
-          <button className="flex items-center gap-1 text-sm"
-          // disabled={addedToWishList}
-          >
-            <Heart size={16} /> Like
+          <button className="flex items-center gap-1 text-sm" onClick={handleWishList}
+            disabled={addedToWishList}>
+            <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
           </button>
         </div>
       </div>
