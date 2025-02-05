@@ -29,6 +29,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     addProdToWishList(obj)
     setAddedToWishList(true)
   }
+
   // run useeffect to check if something in cart or wishlist
   useEffect(() => {
     // this find the cart item or wish list whether it is  for first time happens in wishList or cart
@@ -36,6 +37,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     cart.find((cartItem) => cartItem.productId === product._id) && setAddedToCart(true)
     wishList.find((wishListItem) => wishListItem.productId === product._id) && setAddedToWishList(true)
   }, [cart, wishList])
+
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
