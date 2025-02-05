@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   const { addProdToCart, cart } = useCart()
   // const { addProdToWishList, wishList } = useWishList()
   const [addedToCart, setAddedToCart] = useState(false)
-  const [addedToWishList, setAddedToWishList] = useState(false)
+  // const [addedToWishList, setAddedToWishList] = useState(false)
 
   //hndleCart send prod tocart obj for the first time
   const handleCart = () => {
@@ -78,8 +78,9 @@ const ProductCard = ({ product }: { product: Product }) => {
             <ShoppingCart size={16} /> Compare
           </button>
           <button className="flex items-center gap-1 text-sm"
-            disabled={addedToWishList}>
-            <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
+          // disabled={addedToWishList}
+          >
+            <Heart size={16} /> Like
           </button>
         </div>
       </div>
