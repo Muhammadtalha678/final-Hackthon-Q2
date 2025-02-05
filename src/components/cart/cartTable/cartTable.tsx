@@ -8,8 +8,10 @@ import { useCart } from '@/context/CartContext'
 import { cartObject } from "@/lib/object";
 import { Cart } from "@/interfaces/Cart";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CartTable = () => {
+    const router = useRouter()
     // import contexts from cart
     const { cart, addProdToCart, decreaseItemQuan, removeItem } = useCart();
 
@@ -110,7 +112,8 @@ const CartTable = () => {
                         </div>
 
 
-                        <Button variant={'btnPrimary'} className="w-full  py-2 rounded-lg">
+                        <Button variant={'btnPrimary'} className="w-full  py-2 rounded-lg"
+                            onClick={() => router.push('/checkout')}>
                             Check Out
                         </Button>
                     </CardContent>
