@@ -25,7 +25,6 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   //hndlewishList send prod to wishlist obj for the first time
   const handleWishList = () => {
-
     const obj = wishListObject(product)
     addProdToWishList(obj)
     setAddedToWishList(true)
