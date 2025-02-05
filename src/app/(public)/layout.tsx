@@ -5,6 +5,7 @@ import Header from "@/components/common/Header/Header";
 import Footer from "@/components/common/Footer/Footer";
 import { poppins } from "@/lib/fonts";
 import { CartContextProvider } from "@/context/CartContext";
+import { WishListProvider } from "@/context/WishListContext";
 
 
 
@@ -25,12 +26,15 @@ export default function RootLayout({
       >
         <ClerkProvider>
           <CartContextProvider>
-            <div className="max-w-[1440px] mx-auto">
-              <Header />
-              {children}
-              <Footer />
+            <WishListProvider>
 
-            </div>
+              <div className="max-w-[1440px] mx-auto">
+                <Header />
+                {children}
+                <Footer />
+
+              </div>
+            </WishListProvider>
 
           </CartContextProvider>
 
