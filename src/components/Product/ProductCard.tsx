@@ -25,7 +25,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   useEffect(() => {
     // this find the cart item or wish list whether it is  for first time happens in wishList or cart
     // or adding to cart or wish list  
-    cart.find((cartItem) => cartItem.productId === product._id) && setAddedToCart(true)
+    cart.find((cartItem) => cartItem.productId === product._id) ? setAddedToCart(true) : setAddedToCart(false)
   }, [cart])
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
