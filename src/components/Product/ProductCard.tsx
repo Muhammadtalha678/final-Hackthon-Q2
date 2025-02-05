@@ -13,6 +13,7 @@ import { cartObject, wishListObject } from '@/lib/cartObject';
 const ProductCard = ({ product }: { product: Product }) => {
   const { addProdToCart, cart } = useCart()
   const { addProdToWishList, wishList } = useWishList()
+
   const [addedToCart, setAddedToCart] = useState(false)
   const [addedToWishList, setAddedToWishList] = useState(false)
 
