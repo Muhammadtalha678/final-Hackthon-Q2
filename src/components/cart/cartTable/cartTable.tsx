@@ -8,7 +8,6 @@ import { useCart } from '@/context/CartContext'
 import { cartObject } from "@/lib/object";
 import { Cart } from "@/interfaces/Cart";
 import { useEffect, useState } from "react";
-import { useWishList } from "@/context/WishListContext";
 
 const CartTable = () => {
     // import contexts from cart
