@@ -7,7 +7,7 @@ import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
 // import { useWishList } from '@/context/WishListContext'
 import { useEffect, useState } from 'react';
-import { cartObject, wishListObject } from '@/lib/cartObject';
+import { cartObject } from '@/lib/cartObject';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -24,11 +24,11 @@ const ProductCard = ({ product }: { product: Product }) => {
   }
 
   //hndlewishList send prod to wishlist obj for the first time
-  const handleWishList = () => {
-    const obj = wishListObject(product)
-    // addProdToWishList(obj)
-    setAddedToWishList(true)
-  }
+  // const handleWishList = () => {
+  //   const obj = wishListObject(product)
+  //   // addProdToWishList(obj)
+  //   setAddedToWishList(true)
+  // }
 
   // run useeffect to check if something in cart or wishlist
   useEffect(() => {
@@ -77,7 +77,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button className="flex items-center gap-1 text-sm">
             <ShoppingCart size={16} /> Compare
           </button>
-          <button className="flex items-center gap-1 text-sm" onClick={handleWishList}
+          <button className="flex items-center gap-1 text-sm"
             disabled={addedToWishList}>
             <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
           </button>
