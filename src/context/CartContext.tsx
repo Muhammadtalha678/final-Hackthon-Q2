@@ -91,4 +91,4 @@ const useCart = (): CartContextType => {
     }
     return context;
 };
-export { CartContext, CartContextProvider, useCart }
+export { CartContextProvider, useCart }
