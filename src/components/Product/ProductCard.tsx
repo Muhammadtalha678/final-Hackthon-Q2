@@ -5,7 +5,6 @@ import { ShoppingCart, Heart, Share2 } from "lucide-react";
 import { urlFor } from '@/sanity/lib/image';
 import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
-import { useEffect, useState } from 'react';
 import { cartObject } from '@/lib/cartObject';
 
 
