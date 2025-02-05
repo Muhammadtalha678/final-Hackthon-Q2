@@ -5,14 +5,14 @@ import { ShoppingCart, Heart, Share2 } from "lucide-react";
 import { urlFor } from '@/sanity/lib/image';
 import { discountPercentage } from '@/lib/dicountPercentage';
 import { useCart } from '@/context/CartContext'
-import { useWishList } from '@/context/WishListContext'
+// import { useWishList } from '@/context/WishListContext'
 import { useEffect, useState } from 'react';
 import { cartObject, wishListObject } from '@/lib/cartObject';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { addProdToCart, cart } = useCart()
-  const { addProdToWishList, wishList } = useWishList()
+  // const { addProdToWishList, wishList } = useWishList()
   const [addedToCart, setAddedToCart] = useState(false)
   const [addedToWishList, setAddedToWishList] = useState(false)
 
@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   //hndlewishList send prod to wishlist obj for the first time
   const handleWishList = () => {
     const obj = wishListObject(product)
-    addProdToWishList(obj)
+    // addProdToWishList(obj)
     setAddedToWishList(true)
   }
 
@@ -35,8 +35,8 @@ const ProductCard = ({ product }: { product: Product }) => {
     // this find the cart item or wish list whether it is  for first time happens in wishList or cart
     // or adding to cart or wish list  
     cart.find((cartItem) => cartItem.productId === product._id) && setAddedToCart(true)
-    wishList.find((wishListItem) => wishListItem.productId === product._id) && setAddedToWishList(true)
-  }, [cart, wishList])
+    // wishList.find((wishListItem) => wishListItem.productId === product._id) && setAddedToWishList(true)
+  }, [cart])
 
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
