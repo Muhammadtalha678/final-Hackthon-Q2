@@ -3,10 +3,11 @@
 import Category from "@/components/home/Category";
 import Hero from "@/components/home/Hero";
 import OurProducts from "@/components/home/OurProducts";
-import { currentUser } from "@clerk/nextjs/server";
+// import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Home() {
-  const user = await currentUser()
+  // const user = await currentUser()
+  // // console.log(user?.fullName);
   // console.log(user?.id);
 
   return (
