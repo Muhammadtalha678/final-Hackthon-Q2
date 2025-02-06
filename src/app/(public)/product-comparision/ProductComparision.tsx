@@ -84,7 +84,7 @@ export default function ProductSelection() {
                 <div className="relative mt-2">
                     <select
                         className="appearance-none w-full p-2 border rounded-md bg-white"
-                        onChange={(e) => setSelectedProduct(e.target.value)}
+                    // onChange={(e) => setSelectedProduct(e.target.value)}
                     >
                         <option value="">Choose a Product</option>
                         {products.map((product) => (
