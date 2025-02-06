@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export const CategoryCard: React.FC<CategoryCardProps> = ({ image, title, id }) => {
     return (
         <div className="bg-white rounded-lg  overflow-hidden">
-            <Link href={`/category/${title.split(' ').join('-').toLowerCase()}/${id}`}>
+            <Link href={`/categories/${title.split(' ').join('-').toLowerCase()}/${id}`}>
                 <Image width={500} height={500} src={image} alt={title} className="w-full h-64 object-fill rounded-lg" />
             </Link>
             <div className="p-4">
