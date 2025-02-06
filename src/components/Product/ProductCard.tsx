@@ -8,6 +8,7 @@ import { useCart } from '@/context/CartContext'
 import { useEffect, useState } from 'react';
 import { cartObject, wishListObject } from '@/lib/object';
 import { useWishList } from '@/context/WishListContext';
+import Link from 'next/link';
 
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -57,8 +58,10 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
       {/* Product Image */}
+
       <div className="relative">
         <Image src={urlFor(product.thumbnail).url()} alt={product.name} width={500} height={500} className="w-full h-64 object-cover" />
+
 
         {/* Discount or New Label */}
         <div className="absolute top-4  flex justify-between items-center w-full  px-2">
@@ -76,29 +79,31 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
       </div>
 
+
       {/* Hover Overlay (Now controlled via group-hover) */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <Link href={`/shop/${product._id}`}>
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 
 
-        <button className={`${addedToCart ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart} disabled={addedToCart}>
-          {addedToCart ? "Added" : "Add to cart"}
-        </button>
-
-
-
-        <div className="flex gap-4 text-white">
-          <button className="flex items-center gap-1 text-sm">
-            <Share2 size={16} /> Share
+          <button className={`${addedToCart ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart} disabled={addedToCart}>
+            {addedToCart ? "Added" : "Add to cart"}
           </button>
-          <button className="flex items-center gap-1 text-sm">
-            <ShoppingCart size={16} /> Compare
-          </button>
-          <button className="flex items-center gap-1 text-sm" onClick={handleWishList} disabled={addedToWishList}>
-            <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
-          </button>
+
+
+
+          <div className="flex gap-4 text-white">
+            <button className="flex items-center gap-1 text-sm">
+              <Share2 size={16} /> Share
+            </button>
+            <button className="flex items-center gap-1 text-sm">
+              <ShoppingCart size={16} /> Compare
+            </button>
+            <button className="flex items-center gap-1 text-sm" onClick={handleWishList} disabled={addedToWishList}>
+              <Heart size={16} fill={addedToWishList ? 'red' : 'transparent'} /> Like
+            </button>
+          </div>
         </div>
-      </div>
-
+      </Link >
       {/* Product Info */}
       <div className="p-4 bg-white">
         <h3 className="text-lg font-semibold">{product.name}</h3>
