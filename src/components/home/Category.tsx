@@ -1,8 +1,9 @@
 import { CategoryInterface } from "@/interfaces/Category";
 import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
-import Link from "next/link";
 import CategoryCardSkeleton from "../Skeletons/Category/CategoryCardSkeleton";
+import { CategoryCard } from "../Category/CategoryCard";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 
 const Category = async () => {
@@ -36,6 +37,12 @@ const Category = async () => {
             ))
         }
       </div>
+      {
+        data.length > 0 &&
+        <Link href={'/categories'}>
+          <Button variant={'btnPrimary'} className='mt-5'>Show More</Button>
+        </Link>
+      }
     </div>
 
   )
@@ -43,22 +50,5 @@ const Category = async () => {
 
 export default Category
 
-interface CategoryCardProps {
-  image: string;
-  title: string;
-  id: string
-}
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ image, title, id }) => {
-  return (
-    <div className="bg-white rounded-lg  overflow-hidden">
-      <Link href={`/category/${title.split(' ').join('-').toLowerCase()}/${id}`}>
-        <Image width={200} height={200} src={image} alt={title} className="w-full md:h-[480px] h-[360px] object-fill rounded-lg" />
-      </Link>
-      <div className="p-4">
-        <h3 className="text-[24px] leading-[36px] font-semibold text-gray-800 ">{title}</h3>
-      </div>
-    </div>
-  );
-};
 
