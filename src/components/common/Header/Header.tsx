@@ -71,7 +71,9 @@ const Navbar = () => {
             <SignInButton />
           </SignedOut>
           <div className="relative">
-            <Heart className="w-6 h-6 cursor-pointer" />
+            <Link href={'/wishlist'}>
+              <Heart className="w-6 h-6 cursor-pointer" />
+            </Link>
 
             {/* Cart count badge */}
             <span className="absolute -top-1 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
@@ -124,7 +126,9 @@ const Navbar = () => {
               <SignInButton />
             </SignedOut>
             <div className="relative">
-              <Heart className="w-6 h-6 cursor-pointer" />
+              <Link href={'/wishlist'}>
+                <Heart className="w-6 h-6 cursor-pointer" />
+              </Link>
 
               {/* Cart count badge */}
               <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
