@@ -2,6 +2,7 @@ import { CategoryInterface } from "@/interfaces/Category";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import CategoryCardSkeleton from "../Skeletons/Category/CategoryCardSkeleton";
 
 
 const Category = async () => {
@@ -30,8 +31,9 @@ const Category = async () => {
             data.map((category, index) => (
               <CategoryCard key={index} id={category._id} image={urlFor(category.image).url()} title={category.title} />
             )) :
-            <h1>No Category Not Fund</h1>
-
+            [...Array(3)].map((_, index) => (
+              <CategoryCardSkeleton key={index} />
+            ))
         }
       </div>
     </div>

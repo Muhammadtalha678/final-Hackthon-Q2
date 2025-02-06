@@ -4,6 +4,7 @@ import React from 'react'
 import ProductCard from '../Product/ProductCard';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import ProductCardSkeleton from '../Skeletons/Product/ProductCardSkeleton';
 const OurProducts = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`)
   if (!response.ok) {
@@ -24,13 +25,18 @@ const OurProducts = async () => {
             data.slice(0, 8).map((product, index) => (
               <ProductCard product={product} key={index + 1} />
             )) :
-            <h1>No Product Not Fund</h1>
+            Array(8).fill(null).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))
 
         }
       </div>
-      <Link href={'/shop'}>
-        <Button variant={'btnPrimary'} className='mt-5'>Show More</Button>
-      </Link>
+      {
+        data.length > 0 &&
+        <Link href={'/shop'}>
+          <Button variant={'btnPrimary'} className='mt-5'>Show More</Button>
+        </Link>
+      }
     </div>
   )
 }
