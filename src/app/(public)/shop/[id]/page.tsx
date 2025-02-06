@@ -1,7 +1,8 @@
 import { Product } from '@/interfaces/Product';
-// import { Metadata } from 'next';
 import React from 'react'
 import Breadcrumb from './ProductBreadCrumb';
+import { Metadata } from 'next';
+import ProductDetailsComp from '@/components/Product/ProductDetails';
 
 const fetchSingleProduct = async (id: string): Promise<{ product: Product | null, error: string | null }> => {
     try {
@@ -27,21 +28,20 @@ const fetchSingleProduct = async (id: string): Promise<{ product: Product | null
     }
 }
 
-// export async function generateMetadata({ params }: { params: Promise<{ id: string, }> }): Promise<Metadata> {
-//     const { id } = await params
-//     if (id) {
-//         const [category] = id;
-//         return {
-//             title: `${category} | Furniro`,
-//             description: `Explore our selection of ${category.toLowerCase()} at Furniro. Shop now!`,
-//         };
+export async function generateMetadata({ params }: { params: Promise<{ id: string, }> }): Promise<Metadata> {
+    const { id } = await params
+    if (id) {
+        return {
+            title: `${id} | Furniro`,
+            description: `Explore our selection of ${id} at Furniro. Shop now!`,
+        };
 
-//     }
-//     return {
-//         title: `Error | Furniro`,
-//         description: `Error`,
-//     };
-// }
+    }
+    return {
+        title: `Error | Furniro`,
+        description: `Error`,
+    };
+}
 
 const ProductDetail = async ({ params }: { params: Promise<{ id: string }> }) => {
     const id = (await params).id
@@ -63,7 +63,8 @@ const ProductDetail = async ({ params }: { params: Promise<{ id: string }> }) =>
     return (
         <div>
             <Breadcrumb prodName={product.name} />
-            {/* <ProductDetailsComp />
+            <ProductDetailsComp ProductDetail={product} />
+            {/*
             <ProductDescriptionTabBr /> */}
 
         </div>
