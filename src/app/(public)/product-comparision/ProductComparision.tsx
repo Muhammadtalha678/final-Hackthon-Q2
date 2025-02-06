@@ -13,7 +13,7 @@ interface Product {
 }
 
 export default function ProductSelection() {
-    const [selectedProduct, setSelectedProduct] = useState<string>("");
+    // const [selectedProduct, setSelectedProduct] = useState<string>("");
 
     const products: Product[] = [
         {
