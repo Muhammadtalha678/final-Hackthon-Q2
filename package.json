@@ -24,6 +24,7 @@
     "next-sanity": "^9.8.46",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "sanity": "^3.72.1",
     "styled-components": "^6.1.14",
     "tailwind-merge": "^2.6.0",
