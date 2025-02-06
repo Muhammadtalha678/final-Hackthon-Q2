@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { Menu, ShoppingCart, Heart, User, ShoppingBag, Truck } from "lucide-react";
+import { Menu, ShoppingCart, Heart, ShoppingBag, Truck } from "lucide-react";
 import SearchCompo from "@/components/common/Header/Search";
 import { navLink } from "@/lib/link";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
-import { SignedIn, SignedOut, SignInButton, useClerk } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import { useWishList } from '@/context/WishListContext'
@@ -25,12 +24,12 @@ const Navbar = () => {
         <motion.div
           className="flex items-center gap-2 whitespace-nowrap text-black text-lg md:text-xl font-semibold"
           animate={{ x: ["100%", "-100%"] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "linear" }} // ✅ Slower transition
+          transition={{ repeat: Infinity, duration: 15, ease: "linear" }} // Slower transition
         >
-          <ShoppingBag className="w-6 h-6 inline-block" /> {/* 🛍️ Icon */}
+          <ShoppingBag className="w-6 h-6 inline-block" />
           Shop over <span className="font-bold">Rs. 10,000</span> & get{" "}
           <span className="underline">Free Delivery!</span>
-          <Truck className="w-6 h-6 inline-block" /> {/* 🚚 Icon */}
+          <Truck className="w-6 h-6 inline-block" />
         </motion.div>
       </div>
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
