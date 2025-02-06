@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ImageGallery = () => {
     return (
-        <div className="container mx-auto px-4 lg:px-16 mt-16 ">
+        <div className="container mx-auto px-4 lg:px-16 mt-16 mb-16">
             <div className="py-6">
 
                 <h3 className="text-center font-semibold text-[20px] leading-[30px] text-[#616161]">Share your setup with</h3>
