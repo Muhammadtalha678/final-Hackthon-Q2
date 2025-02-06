@@ -42,11 +42,15 @@ const CategoryProducts = async ({ params }: { params: Promise<{ id: string[], }>
 
   return (
     <div className='mt-10 px-6'>
-      <h1 className='md:text-3xl text-2xl text-black font-extrabold mb-5'>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
       {
         cateProducts.length > 0 ?
-          <ProductListing products={cateProducts} />
-          : <h1>No Product Found</h1>
+          <>
+            <h1 className='md:text-3xl text-2xl text-black font-extrabold mb-5'>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+            <ProductListing products={cateProducts} />
+          </>
+          : <h1 className='md:text-3xl text-2xl text-black font-extrabold mb-5 text-center my-5'>
+            No Product found of category {category}
+          </h1>
       }
     </div>
   )
