@@ -16,16 +16,23 @@ const fetchCategories = async (): Promise<CategoryInterface[]> => {
     }
     console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
-    if (!response.ok) {
-        throw new Error("Something went wrong.");
+    try {
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+        if (!response.ok) {
+            throw new Error("Something went wrong.");
+
+        }
+        const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
+        if (error) {
+            throw new Error(message);
+        }
+        return data
+    } catch (error) {
+        const err = error as Error
+        throw new Error(err.message);
 
     }
-    const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
-    if (error) {
-        throw new Error(message);
-    }
-    return data
 }
 
 const Categories = async () => {
