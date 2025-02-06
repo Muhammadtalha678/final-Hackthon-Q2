@@ -28,7 +28,7 @@ const Category = async () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         {
           data.length > 0 ?
-            data.map((category, index) => (
+            data.slice(0, 3).map((category, index) => (
               <CategoryCard key={index} id={category._id} image={urlFor(category.image).url()} title={category.title} />
             )) :
             [...Array(3)].map((_, index) => (
