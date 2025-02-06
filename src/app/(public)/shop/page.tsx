@@ -5,6 +5,12 @@ import React from 'react'
 import ProductToolbar from './Filter';
 import Pagination from '@/components/Pagination';
 import Services from '@/components/resuable/Services';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Products | Furniro",
+  description: "Find best furniture for you home and othe places.",
+};
 
 const Shop = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
 

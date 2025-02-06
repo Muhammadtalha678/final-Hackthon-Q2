@@ -1,6 +1,12 @@
 import { Hero2 } from '@/components/resuable/Hero2'
 import React from 'react'
 import ContactForm from './contactForm'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contact Us | Furniro",
+  description: "Get in touch with the Furniro team.",
+};
 
 const Contact = () => {
   return (
