@@ -1,5 +1,4 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { redirect } from "next/dist/server/api-utils";
 import { NextResponse } from "next/server";
 
 const isProtectedRoutes = createRouteMatcher(['/shipment', '/cart', '/checkout'])
