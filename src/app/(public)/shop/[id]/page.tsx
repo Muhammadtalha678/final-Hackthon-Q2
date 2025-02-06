@@ -1,5 +1,5 @@
 import { Product } from '@/interfaces/Product';
-import { Metadata } from 'next';
+// import { Metadata } from 'next';
 import React from 'react'
 import Breadcrumb from './ProductBreadCrumb';
 
