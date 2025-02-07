@@ -4,7 +4,7 @@ import { } from '@clerk/nextjs'
 import { client } from "./sanity/lib/client";
 
 // define route for protected and admin route 
-const isProtectedRoutes = createRouteMatcher(['/shipment', '/cart', '/checkout', '/admin/:path*', '/api/(.*)'])
+const isProtectedRoutes = createRouteMatcher(['/shipment', '/cart', '/checkout', '/admin/:path*'])
 const isAdminRoute = createRouteMatcher('/admin/:path*')
 
 export default clerkMiddleware(async (auth, req) => {
@@ -18,7 +18,7 @@ export default clerkMiddleware(async (auth, req) => {
 
     // Agar admin route hai, tabhi Sanity se role fetch karo aur match kro
     if (isAdminRoute(req)) {
-        console.log('admin');
+        // console.log('admin');
 
         //   Sanity se user ka role fetch karo
         const sanityUser = await client.fetch(`*[_type == "user" && userId == $user]`, { user });
