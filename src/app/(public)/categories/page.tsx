@@ -49,7 +49,7 @@ const Categories = async () => {
                 categories.length > 0 ?
                     <CategoyListing categories={categories} />
                     : <h1 className='md:text-3xl text-2xl text-black font-extrabold mb-5 text-center my-5'>
-                        No Category found</h1>
+                        No Category founds</h1>
             }
 
 
