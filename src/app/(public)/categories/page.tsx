@@ -10,30 +10,30 @@ export const metadata: Metadata = {
     description: "Browse all furniture categories at Furniro and find the perfect piece for your home.",
 };
 
-const fetchCategories = async (): Promise<CategoryInterface[]> => {
-    if (!process.env.NEXT_PUBLIC_BASE_URL) {
-        throw new Error("Base Url is not given!.");
-    }
-    console.log(process.env.NEXT_PUBLIC_BASE_URL);
+// const fetchCategories = async (): Promise<CategoryInterface[]> => {
+//     if (!process.env.NEXT_PUBLIC_BASE_URL) {
+//         throw new Error("Base Url is not given!.");
+//     }
+//     console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-    try {
+//     try {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
-        if (!response.ok) {
-            throw new Error("Something went wrong.");
+//         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+//         if (!response.ok) {
+//             throw new Error("Something went wrong.");
 
-        }
-        const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
-        if (error) {
-            throw new Error(message);
-        }
-        return data
-    } catch (error) {
-        const err = error as Error
-        throw new Error(err.message);
+//         }
+//         const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
+//         if (error) {
+//             throw new Error(message);
+//         }
+//         return data
+//     } catch (error) {
+//         const err = error as Error
+//         throw new Error(err.message);
 
-    }
-}
+//     }
+// }
 
 const Categories = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
@@ -42,6 +42,9 @@ const Categories = async () => {
 
     }
     const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
+    if (error) {
+        throw new Error(message);
+    }
     const categories = data
     return (
         <div>
