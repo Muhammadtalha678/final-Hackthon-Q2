@@ -36,7 +36,13 @@ const fetchCategories = async (): Promise<CategoryInterface[]> => {
 }
 
 const Categories = async () => {
-    const categories = await fetchCategories()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+    if (!response.ok) {
+        throw new Error("Something went wrong.");
+
+    }
+    const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()
+    const categories = data
     return (
         <div>
             <Hero2
