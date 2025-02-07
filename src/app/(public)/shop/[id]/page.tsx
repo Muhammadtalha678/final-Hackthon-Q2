@@ -13,7 +13,8 @@ const fetchSingleProduct = async (id: string): Promise<{ product: Product | null
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${id}`,
             {
-                cache: 'no-store'
+                // cache: 'no-store'
+                next: { revalidate: 60 }
             }
         )
         if (!response.ok) {

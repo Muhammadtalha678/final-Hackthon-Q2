@@ -8,7 +8,8 @@ import { Button } from "../ui/button";
 
 const Category = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`, {
-    cache: 'no-store'
+    // cache: 'no-store'
+    next: { revalidate: 60 }
   })
   if (!response.ok) throw new Error("Category not Found");
 
