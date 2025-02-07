@@ -18,10 +18,10 @@ export default clerkMiddleware(async (auth, req) => {
 
     // Agar admin route hai, tabhi Sanity se role fetch karo aur match kro...
     if (isAdminRoute(req)) {
-        // console.log('admin');
 
         //   Sanity se user ka role fetch karo
-        const sanityUser = await client.fetch(`*[_type == "user" && userId == $user]`, { user });
+        const sanityUser = await client.fetch(`*[_type == "user" && userId == $user][0]`, { user });
+
 
         // Agar user "Admin" nahi hai, to unauthorized page pe bhej do
         if (url.pathname === '/admin' && sanityUser?.role !== 'admin') {
