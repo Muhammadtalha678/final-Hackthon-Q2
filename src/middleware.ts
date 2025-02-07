@@ -16,7 +16,7 @@ export default clerkMiddleware(async (auth, req) => {
         await auth.protect()
     }
 
-    // Agar admin route hai, tabhi Sanity se role fetch karo aur match kro
+    // Agar admin route hai, tabhi Sanity se role fetch karo aur match kro...
     if (isAdminRoute(req)) {
         // console.log('admin');
 
