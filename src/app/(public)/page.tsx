@@ -1,8 +1,8 @@
-import Category from "@/components/home/Category";
+// import Category from "@/components/home/Category";
 import Inspirations from "@/components/home/Cta";
 import Hero from "@/components/home/Hero";
 import ImageGallery from "@/components/home/ImageGallery";
-import OurProducts from "@/components/home/OurProducts";
+// import OurProducts from "@/components/home/OurProducts";
 import { Metadata } from "next";
 // import { currentUser } from "@clerk/nextjs/server";
 
