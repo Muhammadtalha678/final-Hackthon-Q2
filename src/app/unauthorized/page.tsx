@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import { headers } from 'next/headers'
 import Link from "next/link";
 export default async function Unauthorized() {
 
