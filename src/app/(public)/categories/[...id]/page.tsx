@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const [category] = id;
     return {
       title: `${category} | Furniro`,
-      description: `Explore our selection of ${category.toLowerCase()} at Furniro. Shop now!`,
+      description: `Explore our selection of ${category.toLowerCase()} at Furniro. Shop now.!`,
     };
 
   }
