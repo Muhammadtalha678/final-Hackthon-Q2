@@ -12,7 +12,11 @@ const fetchProductsByCategory = async (id: string): Promise<Product[]> => {
     }
     console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category/${id}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category/${id}`,
+      {
+        cache: 'no-store'
+      }
+    )
     if (!response.ok) {
       throw new Error("Something went wrong.");
 
@@ -36,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const [category] = id;
     return {
       title: `${category} | Furniro`,
-      description: `Explore our selection of ${category.toLowerCase()} at Furniro. Shop now.!`,
+      description: `Explore our selection of ${category.toLowerCase()} at Furniro. Shop now!`,
     };
 
   }

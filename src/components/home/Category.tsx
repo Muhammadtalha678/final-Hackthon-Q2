@@ -7,7 +7,9 @@ import { Button } from "../ui/button";
 
 
 const Category = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`, {
+    cache: 'no-store'
+  })
   if (!response.ok) throw new Error("Category not Found");
 
   const { error, message, data }: { error: boolean, message: string, data: CategoryInterface[] } = await response.json()

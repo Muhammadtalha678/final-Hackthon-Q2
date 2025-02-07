@@ -6,7 +6,11 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import ProductCardSkeleton from '../Skeletons/Product/ProductCardSkeleton';
 const OurProducts = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
+    {
+      cache: 'no-store'
+    }
+  )
   if (!response.ok) {
     throw new Error("Error Fetching Products");
   }

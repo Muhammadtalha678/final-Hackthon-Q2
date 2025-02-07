@@ -18,7 +18,11 @@ const fetchCategories = async (): Promise<CategoryInterface[]> => {
 
     try {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`,
+            {
+                cache: 'no-store'
+            }
+        )
         if (!response.ok) {
             throw new Error("Something went wrong.");
 
