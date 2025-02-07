@@ -12,12 +12,7 @@ const fetchProductsByCategory = async (id: string): Promise<Product[]> => {
     }
     console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category/${id}`,
-      {
-        // cache: 'no-store',
-        next: { revalidate: 60 }
-      }
-    )
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category/${id}`)
     if (!response.ok) {
       throw new Error("Something went wrong.");
 

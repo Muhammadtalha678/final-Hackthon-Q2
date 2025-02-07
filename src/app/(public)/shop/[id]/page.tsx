@@ -11,12 +11,7 @@ const fetchSingleProduct = async (id: string): Promise<{ product: Product | null
             // throw new Error("Base Url is not given!.");
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${id}`,
-            {
-                // cache: 'no-store'
-                next: { revalidate: 60 }
-            }
-        )
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${id}`)
         if (!response.ok) {
             return { error: `API request failed with status ${response.status}`, product: null };
 

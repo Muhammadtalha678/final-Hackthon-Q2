@@ -19,12 +19,7 @@ const Shop = async ({ searchParams }: { searchParams: Promise<{ [key: string]: s
 
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
-    {
-      // cache: 'no-store'
-      next: { revalidate: 60 }
-    }
-  )
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`)
   if (!response.ok) {
     throw new Error("Some thing went wrong");
   }
