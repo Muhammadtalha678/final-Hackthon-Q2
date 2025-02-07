@@ -54,8 +54,6 @@ const CategoryProducts = async ({ params }: { params: Promise<{ id: string[], }>
   }
   const [category, categoryId] = id;
   const cateProducts = await fetchProductsByCategory(categoryId)
-  console.log(category);
-  console.log(cateProducts);
 
 
   return (

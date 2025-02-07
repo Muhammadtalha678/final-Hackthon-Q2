@@ -37,7 +37,6 @@ const fetchCategories = async (): Promise<CategoryInterface[]> => {
 
 const Categories = async () => {
     const categories = await fetchCategories()
-
     return (
         <div>
             <Hero2
