@@ -2,6 +2,7 @@ import { CartContextProvider } from '@/context/CartContext';
 import { WishListProvider } from '@/context/WishListContext';
 import { poppins } from '@/lib/fonts';
 import { ClerkProvider } from '@clerk/nextjs';
+import './globals.css'
 import React from 'react'
 
 const RootLayout = ({
