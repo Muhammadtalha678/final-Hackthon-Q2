@@ -3,6 +3,7 @@ export const checkOutValidationSchema = z.object({
     firstname: z
         .string({ message: "Name is required" })
         .min(3, { message: "Name should be at least 3 characters" }),
+
     lastname: z
         .string({ message: "Last name is required" })
         .min(3, { message: "Name should be at least 3 characters" }),
@@ -11,21 +12,24 @@ export const checkOutValidationSchema = z.object({
         .string({ message: "Email is required" })
         .email({ message: "Please provide a valid email address" }),
 
-    country: z
-        .string({ message: "Country is required" })
-        .min(3, { message: "Country should be at least 3 characters" }),
 
     address: z
         .string({ message: "Address is required" })
         .min(3, { message: "Address should be at least 3 characters" }),
 
-    town: z
-        .string({ message: "Town is required" })
-        .min(3, { message: "Town should be at least 3 characters" }),
-
+    country: z
+        .string({ message: "Country is required" })
+        .min(3, { message: "Country should be at least 3 characters" })
+        .default("Pakistan"),
     province: z
         .string({ message: "Province is required" })
-        .min(3, { message: "Province should be at least 3 characters" }),
+        .min(3, { message: "Province should be at least 3 characters" })
+        .default("Sindh"),
+
+    town: z
+        .string({ message: "Town is required" })
+        .min(3, { message: "Town should be at least 3 characters" })
+        .default("Karachi"),
 
     zipcode: z
         .string({ message: "Country is required" })
