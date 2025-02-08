@@ -1,5 +1,5 @@
 import z from 'zod'
-const checkOutValidation = z.object({
+export const checkOutValidation = z.object({
     firstname: z
         .string({ message: "Name is required" })
         .min(3, { message: "Name should be at least 3 characters" }),
