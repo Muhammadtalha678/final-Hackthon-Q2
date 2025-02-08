@@ -1,6 +1,5 @@
 'use client'
 import { useClerk } from "@clerk/nextjs";
-import { useState } from "react";
 import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckOutValidationSchema, checkOutValidationSchema } from "@/utils/validations/checkoutValidation";
