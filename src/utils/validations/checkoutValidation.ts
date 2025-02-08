@@ -1,5 +1,5 @@
 import z from 'zod'
-export const checkOutValidation = z.object({
+export const checkOutValidationSchema = z.object({
     firstname: z
         .string({ message: "Name is required" })
         .min(3, { message: "Name should be at least 3 characters" }),
@@ -40,3 +40,5 @@ export const checkOutValidation = z.object({
             message: "Invalid Pakistani phone number. Must start with '03' and have 11 digits.",
         })
 })
+
+export type CheckOutValidationSchema = z.infer<typeof checkOutValidationSchema>;
