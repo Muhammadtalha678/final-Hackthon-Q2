@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from "react";
-
+import { useCart } from "@/context/CartContext";
+import { useEffect, useState } from "react";
 export default function CheckoutSummary() {
+    const { cart } = useCart()
     const [loading, setLoading] = useState(false);
+    const [total, setTotal] = useState(0);
 
     const handleSubmit = () => {
         setLoading(true); //first time set true to show loader
@@ -19,6 +21,13 @@ export default function CheckoutSummary() {
             setLoading(false)
         }, 1000);
     }
+
+    useEffect(() => {
+        const amount = cart.reduce((total: number, item) => total + (item.productPrice * item.productQuantity), 0)
+        // console.log(amount >= 10000);
+
+        setTotal(amount)
+    }, [cart])
     return (
         <div className="max-w-md mx-auto p-6 border rounded-lg shadow-lg bg-white">
             {/* Product & Subtotal */}
@@ -26,19 +35,31 @@ export default function CheckoutSummary() {
                 <h2>Product</h2>
                 <h2>Subtotal</h2>
             </div>
-            <div className="flex justify-between text-gray-600 mt-2">
-                <span>Asgaard Sofa x 1</span>
-                <span>Rs. 250,000.00</span>
-            </div>
+            {
+                cart.map((e, index) => (
+                    <div className="flex justify-between text-gray-600 mt-2" key={index + 1}>
+
+                        <span>{`${e.productName} x ${e.productQuantity}`}</span>
+                        <span>{`Rs. ${e.productPrice * e.productQuantity}`}</span>
+
+                    </div>
+                ))
+            }
 
             {/* Total */}
             <div className="flex justify-between mt-4 text-lg font-semibold">
+                <span>Delivery Fees</span>
+                {
+                    total < 10000 ? <span>Rs. 200</span> : <span>Free</span>
+                }
+            </div>
+            <div className="flex justify-between mt-4 text-lg font-semibold">
                 <span>Subtotal</span>
-                <span>Rs. 250,000.00</span>
+                <span>Rs. {total >= 10000 ? total : total + 200}</span>
             </div>
             <div className="flex justify-between mt-2 text-xl font-bold text-yellow-700">
                 <span>Total</span>
-                <span>Rs. 250,000.00</span>
+                <span>Rs. {total >= 10000 ? total : total + 200}</span>
             </div>
 
             <hr className="my-4" />

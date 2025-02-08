@@ -31,8 +31,8 @@ const CartTable = () => {
 
     //any effect in cart run  total calculation and crtTotal use to show price update in summary and in total   
     useEffect(() => {
-        const total = cart.reduce((total: number, item) => (total + (item.productPrice * item.productQuantity)), 0)
-        setCartTotal(total)
+        const amount = cart.reduce((total: number, item) => (total + (item.productPrice * item.productQuantity)), 0)
+        setCartTotal(amount)
     }, [cart])
 
 
