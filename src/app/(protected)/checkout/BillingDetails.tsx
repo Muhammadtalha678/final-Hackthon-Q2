@@ -2,54 +2,22 @@
 import { useClerk } from "@clerk/nextjs";
 import { useState } from "react";
 import { useForm } from 'react-hook-form'
-
-export interface FormData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    companyName: string;
-    country: string;
-    address: string;
-    town: string;
-    province: string;
-    zipcode: string;
-    phone: string;
-    additionalInfo: string;
-}
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckOutValidationSchema, checkOutValidationSchema } from "@/utils/validations/checkoutValidation";
 export default function BillingDetails() {
     const { user } = useClerk()
 
-    // create object of information using use state
-    const [formData, setFormData] = useState({
-        firstName: user?.firstName || '',
-        lastName: user?.lastName || '',
-        email: user?.emailAddresses[0]?.emailAddress || '',
-        country: 'Pakistan', // set by default to Pakistan
-        address: '',
-        town: 'Karachi', // set by default to Karachi
-        province: 'Sindh', // set by default to Sindh
-        zipcode: '',
-        phone: '',
+    const { register, handleSubmit, formState: { errors } } = useForm<CheckOutValidationSchema>({
+        resolver: zodResolver(checkOutValidationSchema),
+        defaultValues: {
+            firstname: user?.firstName || "",
+            lastname: user?.lastName || ""
+        }
     })
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors }
-    } = useForm()
-
-    const customSubmit = (data: Partial<FormData>) => {
+    const customSubmit = (data: CheckOutValidationSchema) => {
         console.log("data", data);
-
-        setFormData((pre) => (
-            {
-                ...pre, ...data
-            }
-        ))
-
     }
-    console.log(formData);
     return (
         <div className="">
             <h2 className="text-2xl font-bold mb-6">Billing details</h2>
@@ -66,67 +34,57 @@ export default function BillingDetails() {
                         <p className=" w-full p-2 border rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed">{user?.lastName || 'N/A'}</p>
                     </div>
                 </div>
-
-                {/* <div className="mt-4">
-                <label className="block text-sm font-medium">Company Name (Optional)</label>
-                <input type="text" className="w-full p-2 border rounded-lg" />
-            </div> */}
+                <div className="mt-4">
+                    <label className="block text-sm font-medium">Email Address</label>
+                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{user?.emailAddresses[0].emailAddress}</p>
+                </div>
+                <div className="mt-4">
+                    <label className="block text-sm font-medium">Phone</label>
+                    <input {...register("phone")}
+                        type="tel" className="w-full p-2 border rounded-lg" name="phone" />
+                </div>
+                {errors.phone && (
+                    <p className='text-red-600 font-bold pt-1'>{errors.phone.message}</p>
+                )}
 
                 <div className="mt-4">
                     <label className="block text-sm font-medium">Country / Region</label>
-                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{formData.country || `Pakistan`}</p>
+                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{`Pakistan`}</p>
                 </div>
 
                 <div className="mt-4">
                     <label className="block text-sm font-medium">Street Address</label>
-                    <input {...register('address', { required: true })}
+                    <input {...register('address')}
                         type="text" className="w-full p-2 border rounded-lg" name="address"
                     />
                 </div>
-                {errors.address && errors.address.type === 'required' && (
-                    <p className='text-red-600 font-bold pt-1'>Address is Required</p>
+                {errors.address && (
+                    <p className='text-red-600 font-bold pt-1'>{errors.address.message}</p>
                 )}
 
                 <div className="mt-4">
                     <label className="block text-sm font-medium">Town / City</label>
-                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{formData.town || `Karachi`}</p>
+                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{`Karachi`}</p>
                 </div>
 
 
                 <div className="mt-4">
                     <label className="block text-sm font-medium">Province</label>
-                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{formData.province || `Sindh`}</p>
+                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{`Sindh`}</p>
                 </div>
 
                 <div className="mt-4">
                     <label className="block text-sm font-medium">ZIP Code</label>
-                    <input {...register('zipcode', { required: true })}
+                    <input {...register('zipcode')}
                         type="text" className="w-full p-2 border rounded-lg" name="zipcode" />
                 </div>
-                {errors.zipcode && errors.zipcode.type === 'required' && (
-                    <p className='text-red-600 font-bold pt-1'>Zip code is Required</p>
+                {errors.zipcode && (
+                    <p className='text-red-600 font-bold pt-1'>{errors.zipcode.message}</p>
                 )}
-
-                <div className="mt-4">
-                    <label className="block text-sm font-medium">Phone</label>
-                    <input {...register('phone', { required: true })}
-                        type="text" className="w-full p-2 border rounded-lg" name="phone" />
-                </div>
-                {errors.phone && errors.phone.type === 'required' && (
-                    <p className='text-red-600 font-bold pt-1'>Phone is Required</p>
-                )}
-
-                <div className="mt-4">
-                    <label className="block text-sm font-medium">Email Address</label>
-                    <p className="cursor-not-allowed w-full p-2 border rounded-lg bg-gray-100 text-gray-600">{user?.emailAddresses[0].emailAddress}</p>
-                </div>
-                {/* <div className="mt-4">
-                <label className="block text-sm font-medium">Additional Information</label>
-                <textarea className="w-full p-2 border rounded-lg bg-gray-100" placeholder="Additional information"></textarea>
-            </div> */}
                 {/* <button type="submit">Submit</button> */}
             </form>
 
         </div>
     );
 }
+

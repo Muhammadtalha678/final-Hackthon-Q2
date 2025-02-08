@@ -17,7 +17,7 @@ export default function CheckoutSummary() {
         }
 
         setTimeout(() => {
-            // hodi der rukhein taake validation errors check ho sakein
+            // thodi der rukhein taake validation errors check ho sakein
             setLoading(false)
         }, 1000);
     }
