@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce Furniture Project
+
+This e-commerce project was originally designed in Figma during a hackathon and has now been fully developed into a functional furniture marketplace. The goal was to create a responsive, feature-rich platform within a week using Next.js and Sanity CMS. The project includes essential features such as product listings, a shopping cart, a checkout system, and an admin panel for managing operations.
+
+## Project Link
+
+[Marketplace Furniture](https://furnirohackathonq2.vercel.app/)
+
+## Business Goal and Target Audience
+
+This marketplace aims to offer stylish and affordable furniture, making it easier for users to find high-quality, trendy furniture at reasonable prices. The primary audience includes home decor enthusiasts and individuals seeking modern furniture pieces inspired by contemporary design trends.
+
+## Key Features
+
+- **Responsive Design:** Optimized for all screen sizes.
+- **Essential Pages:** Home, Cart, Wishlist, Product Details.
+- **Quantity Controls:** Users can adjust item quantities directly from the Cart and Product Details pages.
+- **API Integration:** Fetches product data dynamically via an API connected to Sanity CMS.
+- **Error Handling & Fall-back UI:** Ensures smooth functionality even if products fail to load.
+- **Backend Integration:** Includes shipment API and checkout system.
+- **Admin Panel:** Allows management of users, orders, and shipments efficiently.
+
+## Development Timeline
+
+### Day 1:
+
+- Defined business goals and target audience.
+- Identified the unique value proposition.
+
+### Day 2:
+
+- Designed and finalized the system architecture.
+
+### Day 3:
+
+- Integrated API data into **Sanity CMS** and displayed it on the frontend.
+
+### Day 4:
+
+- Developed dynamic components to handle various data states.
+
+### Day 5:
+
+- Conducted testing and resolved major issues.
+- Implemented a fallback UI for product failures.
+- Created project documentation.
+
+### Day 6:
+
+- Integrated shipment API and completed checkout functionality.
+
+### Day 7:
+
+- Built and finalized the admin panel for marketplace management.
+- Prepared the project for deployment.
+
+## Technologies Used
+
+- **Next.js** (React framework for the frontend)
+- **Sanity CMS** (Headless CMS for data management)
+- **Tailwind CSS** (Utility-first styling framework)
+- **API Integration** (Product data and shipment processing)
 
 ## Getting Started
 
-First, run the development server:
+### Clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+ git clone https://github.com/Muhammadtalha678/final-Hackthon-Q2.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Navigate to the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+ cd final-Hackthon-Q2
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Install dependencies:
 
-## Learn More
+```sh
+ npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Run the development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+ npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Visit **[http://localhost:3000](http://localhost:3000)** to view the project.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Feel free to fork this repository and submit pull requests for improvements.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is open-source and available under the **MIT License**.
