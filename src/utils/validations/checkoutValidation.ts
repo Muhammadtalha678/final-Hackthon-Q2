@@ -32,8 +32,9 @@ export const checkOutValidationSchema = z.object({
         .default("Karachi"),
 
     zipcode: z
-        .string({ message: "Country is required" })
-        .min(3, { message: "Country should be at least 3 characters" })
+        .string({ message: "Zipcode is required" })
+        .min(3, { message: "Zipcode should be at least 3 characters" })
+        .max(10, { message: "Zipcode should be not be greate tha 10 characters" })
         .refine((val) => /^[0-9]+$/.test(val), {  // Custom validation using regex
             message: "Zipcode should contain only numbers",
         }), //refine allow to add custom errors for validation
@@ -41,7 +42,7 @@ export const checkOutValidationSchema = z.object({
     phone: z
         .string()
         .refine((val) => /^03\d{9}$/.test(val), {
-            message: "Invalid Pakistani phone number. Must start with '03' and have 11 digits.",
+            message: "Invalid phone number. Must start with '03' and have 11 digits.",
         })
 })
 
