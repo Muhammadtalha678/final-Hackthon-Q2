@@ -52,9 +52,13 @@ export async function POST(req: Request) {
     const eventType = evt.type
     if (eventType === 'user.created') {
         const { first_name, last_name, email_addresses } = evt.data
+        const email = email_addresses?.[0]?.email_address || null;
+        if (!email) {
+            return Response.json({ error: true, message: "Email is missing" }, { status: 400 });
+        }
 
         // Check if user already exists in Sanity
-        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`, { userId })
+        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $userKId][0]`, { userId })
         if (sanityUser) {
             return Response.json({ error: true, message: "User already exists" })
         }
@@ -64,7 +68,7 @@ export async function POST(req: Request) {
             _type: 'user',
             userId: userId,
             name: `${first_name} ${last_name}`,
-            email: email_addresses[0].email_address,
+            email: email,
             role: "user",
         })
         return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
