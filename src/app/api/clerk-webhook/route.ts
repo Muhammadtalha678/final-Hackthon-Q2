@@ -48,13 +48,13 @@ export async function POST(req: Request) {
 
     // Do something with payload
     // For this guide, log payload to console
-    const { id } = evt.data
+    const userId = evt.data.id
     const eventType = evt.type
     if (eventType === 'user.created') {
         const { first_name, last_name, email_addresses } = evt.data
 
         // Check if user already exists in Sanity
-        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`, { id })
+        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`, { userId })
         if (sanityUser) {
             return Response.json({ error: true, message: "User already exists" })
         }
@@ -62,14 +62,14 @@ export async function POST(req: Request) {
         // Naya user Sanity me create karein
         const user = await client.create({
             _type: 'user',
-            userId: id,
+            userId: userId,
             name: `${first_name} ${last_name}`,
             email: email_addresses[0].email_address,
             role: "user",
         })
         return Response.json({ error: false, message: "User created in Sanity", data: user })
     }
-    console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+    console.log(`Received webhook with ID ${userId} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
 
     return new Response('Webhook received', { status: 200 })
