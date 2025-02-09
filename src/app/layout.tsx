@@ -12,7 +12,7 @@ const RootLayout = ({
 }>) => {
     return (
         <html lang="en">
-            <body className={`${poppins.className}`}>
+            <body className={`${poppins.className} poppins_afb8ecac-module__Cn2Q3q__className`}>
                 <ClerkProvider>
                     <CartContextProvider>
                         <WishListProvider>
