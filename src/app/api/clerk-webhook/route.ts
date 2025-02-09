@@ -64,7 +64,7 @@ export async function POST(req: Request) {
             _type: 'user',
             userId: id,
             name: `${first_name} ${last_name}`,
-            email: email_addresses,
+            email: email_addresses[0].email_address,
             role: "user",
         })
         return Response.json({ error: false, message: "User created in Sanity", data: user })
