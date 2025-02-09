@@ -64,14 +64,21 @@ export async function POST(req: Request) {
         }
 
         // Naya user Sanity me create karein
-        const user = await client.create({
-            _type: 'user',
-            userId: userId,
-            name: `${first_name} ${last_name}`,
-            email: email,
-            role: "user",
-        })
-        return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
+        try {
+            const user = await client.create({
+                _type: 'user',
+                userId: userId!,
+                name: `${first_name} ${last_name}`,
+                email: email,
+                role: "user",
+            })
+            return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
+
+        } catch (error) {
+            const err = error as Error
+            return Response.json({ error: true, message: err.message, data: null }, { status: 500 })
+
+        }
     }
     console.log(`Received webhook with ID ${userId} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
