@@ -51,8 +51,18 @@ export async function POST(req: Request) {
     const { id } = evt.data
     const eventType = evt.type
     if (eventType === 'user.created') {
+        const { uId, firstName, lastName, email } = await req.json()
         const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`)
         if (sanityUser) return Response.json({ error: true, message: "User already exists" })
+
+        const user = await client.create({
+            _type: 'user',
+            userId: id,
+            name: `${firstName} ${lastName}`,
+            email: email,
+            role: "user",
+        })
+        return Response.json({ error: true, message: "User created in Sanity", data: user })
     }
 
     console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
