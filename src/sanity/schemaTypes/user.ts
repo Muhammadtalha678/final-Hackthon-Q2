@@ -22,7 +22,7 @@ export default {
             name: 'email',
             title: 'Email',
             type: 'string',
-            validation: (Rule: Rule) => Rule.required().unique().email(),
+            validation: (Rule: Rule) => Rule.required().email(),
         },
         {
             name: 'role',
