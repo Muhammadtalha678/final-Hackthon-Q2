@@ -31,12 +31,12 @@ export default clerkMiddleware(async (auth, req) => {
     }
 
     // ya srf checkout pr chly gi route ky liye ha
-    if (url.pathname === '/checkout') {
-        console.log(url.pathname);
+    if (url.pathname === '/checkout' && req.method === "GET") {
+        // console.log(url.pathname);
         //get previous route where it come from
         const referrer = req.headers.get('referer')
         // console.log(!referrer); if user come from unkonu=wn url
-        console.log(!referrer?.includes('/cart')); //if previous route not contain '/cart' then also redirect
+        // console.log(!referrer?.includes('/cart')); //if previous route not contain '/cart' then also redirect
         // to cart
 
         if (!referrer || !referrer.includes('/cart')) {
