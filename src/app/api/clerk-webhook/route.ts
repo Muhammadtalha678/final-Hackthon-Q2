@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-// import { client } from '@/sanity/lib/client'
+import { client } from '@/sanity/lib/client'
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -50,25 +50,25 @@ export async function POST(req: Request) {
     // For this guide, log payload to console
     const userId = evt.data.id
     const eventType = evt.type
-    // if (eventType === 'user.created') {
-    //     const { first_name, last_name, email_addresses } = evt.data
+    if (eventType === 'user.created') {
+        const { first_name, last_name, email_addresses } = evt.data
 
-    //     // Check if user already exists in Sanity
-    //     const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`, { userId })
-    //     if (sanityUser) {
-    //         return Response.json({ error: true, message: "User already exists" })
-    //     }
+        // Check if user already exists in Sanity
+        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`, { userId })
+        if (sanityUser) {
+            return Response.json({ error: true, message: "User already exists" })
+        }
 
-    //     // Naya user Sanity me create karein
-    //     const user = await client.create({
-    //         _type: 'user',
-    //         userId: userId,
-    //         name: `${first_name} ${last_name}`,
-    //         email: email_addresses[0].email_address,
-    //         role: "user",
-    //     })
-    //     return Response.json({ error: false, message: "User created in Sanity", data: user })
-    // }
+        // Naya user Sanity me create karein
+        const user = await client.create({
+            _type: 'user',
+            userId: userId,
+            name: `${first_name} ${last_name}`,
+            email: email_addresses[0].email_address,
+            role: "user",
+        })
+        return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
+    }
     console.log(`Received webhook with ID ${userId} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
 
