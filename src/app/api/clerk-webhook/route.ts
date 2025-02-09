@@ -54,6 +54,7 @@ export async function POST(req: Request) {
         const sanityUser = await client.fetch(`*[_type == 'user' && userId == $id][0]`)
         if (sanityUser) return Response.json({ error: true, message: "User already exists" })
     }
+
     console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
 
