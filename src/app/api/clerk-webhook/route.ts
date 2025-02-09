@@ -58,7 +58,7 @@ export async function POST(req: Request) {
         }
 
         // Check if user already exists in Sanity
-        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $userKId][0]`, { userId })
+        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $userId][0]`, { userId })
         if (sanityUser) {
             return Response.json({ error: true, message: "User already exists" })
         }
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
         try {
             const user = await client.create({
                 _type: 'user',
-                userId: userId!,
+                userId: userId,
                 name: `${first_name} ${last_name}`,
                 email: email,
                 role: "user",
