@@ -2,6 +2,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { client } from '@/sanity/lib/client'
+import { getLocation } from '@/lib/getLocation'
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -62,6 +63,8 @@ export async function POST(req: Request) {
         if (sanityUser) {
             return Response.json({ error: true, message: "User already exists" })
         }
+        const location = await getLocation()
+
 
         // Naya user Sanity me create karein
         try {
@@ -71,6 +74,10 @@ export async function POST(req: Request) {
                 name: `${username}`,
                 email: email,
                 role: "user",
+                country: location.country,
+                state: location.state,
+                city: location.city,
+                zipCode: location.postcode
             })
             return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
 
