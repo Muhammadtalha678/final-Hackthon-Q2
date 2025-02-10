@@ -64,8 +64,23 @@ export async function POST(req: Request) {
             return Response.json({ error: true, message: "User already exists" })
         }
         // const location = await getLocation()
-        const location = await fetch(`https://ipapi.co/json`)
-        const data = await location.json()
+        let country = "Unknown";
+        let state = "Unknown";
+        let city = "Unknown";
+        let zipCode = "Unknown";
+
+        try {
+            const response = await fetch(`https://ipapi.co/json`)
+            if (!response.ok) throw new Error("Failed to fetch location data");
+            const data = await response.json();
+
+            country = data?.country_name || "Unknown";
+            state = data?.region || "Unknown";
+            city = data?.city || "Unknown";
+            zipCode = data?.postal || "Unknown";
+        } catch (error) {
+            console.error("Location fetch failed:", error);
+        }
 
 
         // Naya user Sanity me create karein
@@ -76,10 +91,14 @@ export async function POST(req: Request) {
                 name: `${username}`,
                 email: email,
                 role: "user",
-                country: data.country_name,
-                state: data.region,
-                city: data.city,
-                zipCode: data.postal
+                country: country,
+                state: state,
+                city: city,
+                zipCode: zipCode,
+                // country: data.country_name,
+                // state: data.region,
+                // city: data.city,
+                // zipCode: data.postal
             })
             return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
 
