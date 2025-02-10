@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     const userId = evt.data.id
     const eventType = evt.type
     if (eventType === 'user.created') {
-        const { first_name, last_name, email_addresses } = evt.data
+        const { email_addresses, username } = evt.data
         const email = email_addresses[0].email_address;
         if (!email) {
             return Response.json({ error: true, message: "Email is missing" }, { status: 400 });
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
             const user = await client.create({
                 _type: 'user',
                 userId: userId,
-                name: `${first_name} ${last_name}`,
+                name: `${username}`,
                 email: email,
                 role: "user",
             })
