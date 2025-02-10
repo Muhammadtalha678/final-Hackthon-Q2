@@ -52,13 +52,13 @@ export async function POST(req: Request) {
     const eventType = evt.type
     if (eventType === 'user.created') {
         const { first_name, last_name, email_addresses } = evt.data
-        const email = email_addresses?.[0]?.email_address || null;
+        const email = email_addresses[0].email_address;
         if (!email) {
             return Response.json({ error: true, message: "Email is missing" }, { status: 400 });
         }
 
         // Check if user already exists in Sanity
-        const sanityUser = await client.fetch(`*[_type == 'user' && userId == $userId][0]`, { userId })
+        const sanityUser = await client.fetch(`*[_type == 'user' && email == $email][0]`, { email })
         if (sanityUser) {
             return Response.json({ error: true, message: "User already exists" })
         }
