@@ -51,15 +51,11 @@ export async function POST(req: Request) {
     const userId = evt.data.id
     const eventType = evt.type
     if (eventType === 'user.created') {
-        const { email_addresses, username, public_metadata } = evt.data
+        const { email_addresses, username } = evt.data
         const email = email_addresses[0].email_address;
         if (!email) {
             return Response.json({ error: true, message: "Email is missing" }, { status: 400 });
         }
-        const country = public_metadata?.country || "unknown"
-        const state = public_metadata?.province || "unknown"
-        const city = public_metadata?.city || "unknown"
-        const zipCode = public_metadata?.postalCode || "unknown"
 
         // Check if user already exists in Sanity
         const sanityUser = await client.fetch(`*[_type == 'user' && email == $email][0]`, { email })
@@ -75,10 +71,6 @@ export async function POST(req: Request) {
                 name: `${username}`,
                 email: email,
                 role: "user",
-                country,
-                state,
-                city,
-                zipCode
 
             })
             return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
