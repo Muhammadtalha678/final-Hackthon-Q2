@@ -80,6 +80,20 @@ export async function POST(req: Request) {
 
         }
     }
+    if (eventType === 'user.deleted') {
+        const getUser = await client.fetch(`*[_type == 'user' && userId == $userId][0]`, { userId })
+        if (getUser) {
+            try {
+                const user = await client.delete(getUser.userId)
+                return Response.json({ error: false, message: "User Delete Successfully", data: user }, { status: 200 })
+
+            } catch (error) {
+                const err = error as Error
+                return Response.json({ error: true, message: err.message, data: null }, { status: 500 })
+
+            }
+        }
+    }
     console.log(`Received webhook with ID ${userId} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
 
