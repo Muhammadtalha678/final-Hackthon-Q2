@@ -84,7 +84,7 @@ export async function POST(req: Request) {
         const getUser = await client.fetch(`*[_type == 'user' && userId == $userId][0]`, { userId })
         if (getUser) {
             try {
-                const user = await client.delete(getUser.userId)
+                const user = await client.delete(getUser._id)
                 return Response.json({ error: false, message: "User Delete Successfully", data: user }, { status: 200 })
 
             } catch (error) {
