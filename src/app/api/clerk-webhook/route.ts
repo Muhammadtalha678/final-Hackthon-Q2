@@ -2,7 +2,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { client } from '@/sanity/lib/client'
-// import { getLocation } from '@/lib/getLocation'
+import { getLocation } from '@/lib/getLocation'
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -64,25 +64,8 @@ export async function POST(req: Request) {
             return Response.json({ error: true, message: "User already exists" })
         }
         // const location = await getLocation()
-        let country = "Unknown";
-        let state = "Unknown";
-        let city = "Unknown";
-        let zipCode = "Unknown";
 
-        try {
-            const response = await fetch(`https://ipapi.co/json`)
-            if (!response.ok) throw new Error("Failed to fetch location data");
-            const data = await response.json();
-
-            country = data?.country_name || "Unknown";
-            state = data?.region || "Unknown";
-            city = data?.city || "Unknown";
-            zipCode = data?.postal || "Unknown";
-        } catch (error) {
-            console.error("Location fetch failed:", error);
-        }
-
-
+        const { city, country, postal, region } = await getLocation()
         // Naya user Sanity me create karein
         try {
             const user = await client.create({
@@ -92,9 +75,9 @@ export async function POST(req: Request) {
                 email: email,
                 role: "user",
                 country: country,
-                state: state,
+                state: region,
                 city: city,
-                zipCode: zipCode,
+                zipCode: postal,
                 // country: data.country_name,
                 // state: data.region,
                 // city: data.city,
