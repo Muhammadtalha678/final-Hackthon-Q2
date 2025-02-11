@@ -21,9 +21,16 @@
 
 // }
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 export const getLocation = async () => {
     try {
+        console.log(process.env.IP_INFO_ACCESS_TOKEN);
+
         const ipResponse = await fetch(`https://ipinfo.io/json?token=${process.env.IP_INFO_ACCESS_TOKEN}`)
+
+        console.log("ipResponse", ipResponse);
 
         if (!ipResponse.ok) throw new Error("Something went wrong");
         const getData = await ipResponse.json()
