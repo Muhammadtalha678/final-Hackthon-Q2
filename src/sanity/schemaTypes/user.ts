@@ -48,21 +48,21 @@ export default {
             name: 'city',
             title: 'City',
             type: 'string',
-            validation: (Rule: Rule) => Rule.required(),
+            validation: (Rule: Rule) => Rule.optional(),
             initialValue: 'Karachi', // Default value
         },
         {
             name: 'state',
             title: 'Province',
             type: 'string',
-            validation: (Rule: Rule) => Rule.required(),
+            validation: (Rule: Rule) => Rule.optional(),
             initialValue: 'Sindh', // Default value
         },
         {
             name: 'country',
             title: 'Country',
             type: 'string',
-            validation: (Rule: Rule) => Rule.required(),
+            validation: (Rule: Rule) => Rule.optional(),
             initialValue: 'Pakistan', // Default value
         },
         {
