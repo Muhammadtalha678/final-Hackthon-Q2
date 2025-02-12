@@ -48,8 +48,12 @@ export default {
             name: 'city',
             title: 'City',
             type: 'string',
-            validation: (Rule: Rule) => Rule.optional(),
-            initialValue: 'Karachi', // Default value
+            initialValue: async () => {
+                const res = await fetch("https://ipapi.co/json/")
+                const data = await res.json()
+                return data.city || 'Karachi'
+            },
+            validation: (Rule: Rule) => Rule.required(),
         },
         {
             name: 'state',
