@@ -6,6 +6,7 @@ import { useActionState, useEffect, startTransition } from "react";
 import { useForm } from 'react-hook-form'
 import { checkOutValidationSchema, CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";
 import { zodResolver } from '@hookform/resolvers/zod'
+import DialogLoader from "@/components/DialogLoader/DialogLoader";
 
 export default function CheckoutForm() {
     const { user } = useClerk();
@@ -32,9 +33,8 @@ export default function CheckoutForm() {
     }
 
     return (
-        pending ?
-            <h1>Loading....</h1>
-            :
+        <div>
+
             <form onSubmit={handleSubmit(customSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Left Column - Billing Form */}
                 <div>
@@ -154,5 +154,7 @@ export default function CheckoutForm() {
                     </button>
                 </div>
             </form>
+            <DialogLoader isOpen={pending} />
+        </div>
     );
 }
