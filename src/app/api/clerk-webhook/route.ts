@@ -71,6 +71,10 @@ export async function POST(req: Request) {
                 name: `${username}`,
                 email: email,
                 role: "user",
+                country: "Pakistan",
+                state: "Sindh",
+                city: "Karachi",
+
 
             })
             return Response.json({ error: false, message: "User created in Sanity", data: user }, { status: 200 })
