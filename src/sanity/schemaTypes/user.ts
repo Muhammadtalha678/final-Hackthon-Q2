@@ -48,26 +48,22 @@ export default {
             name: 'city',
             title: 'City',
             type: 'string',
-            initialValue: async () => {
-                const res = await fetch("https://ipapi.co/json/")
-                const data = await res.json()
-                return data.city || 'Karachi'
-            },
+            initialValue: 'Karachi',
             validation: (Rule: Rule) => Rule.required(),
         },
         {
             name: 'state',
             title: 'Province',
             type: 'string',
-            validation: (Rule: Rule) => Rule.optional(),
             initialValue: 'Sindh', // Default value
+            validation: (Rule: Rule) => Rule.optional(),
         },
         {
             name: 'country',
             title: 'Country',
             type: 'string',
-            validation: (Rule: Rule) => Rule.optional(),
             initialValue: 'Pakistan', // Default value
+            validation: (Rule: Rule) => Rule.optional(),
         },
         {
             name: 'zipCode',
