@@ -2,7 +2,7 @@
 
 import { CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";
 
-export async function checkoutAction(prevState: any, formData: CheckOutValidationSchema) {
+export async function checkoutAction(prevState: unknown, formData: CheckOutValidationSchema) {
     console.log(prevState, formData);
 
 
