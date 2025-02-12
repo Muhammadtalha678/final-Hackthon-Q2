@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import React from 'react'
-import CheckoutSummary from './CheckoutSubTotal';
 import BillingDetails from './BillingDetails';
 
 export const metadata: Metadata = {
