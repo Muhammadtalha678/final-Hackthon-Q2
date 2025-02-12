@@ -48,22 +48,19 @@ export default {
             name: 'city',
             title: 'City',
             type: 'string',
-            initialValue: 'Karachi',
-
+            validation: (Rule: Rule) => Rule.optional(),
         },
         {
             name: 'state',
             title: 'Province',
             type: 'string',
-            initialValue: 'Sindh', // Default value
-
+            validation: (Rule: Rule) => Rule.optional(),
         },
         {
             name: 'country',
             title: 'Country',
             type: 'string',
-            initialValue: 'Pakistan', // Default value
-
+            validation: (Rule: Rule) => Rule.optional(),
         },
         {
             name: 'zipCode',
