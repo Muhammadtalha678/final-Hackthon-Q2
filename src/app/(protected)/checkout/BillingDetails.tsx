@@ -2,34 +2,34 @@
 import { checkoutAction } from "@/app/actions/actions";
 import CheckoutSummary from "./CheckoutSubTotal";
 import { useClerk } from "@clerk/nextjs";
-import { useActionState, useEffect, startTransition } from "react";
+import { useEffect } from "react";
 import { useForm } from 'react-hook-form'
 import { checkOutValidationSchema, CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";
 import { zodResolver } from '@hookform/resolvers/zod'
 import DialogLoader from "@/components/DialogLoader/DialogLoader";
+import { Button } from "@/components/ui/button";
+import { useFormStatus } from "react-dom";
 
 export default function CheckoutForm() {
     const { user } = useClerk();
-    const [state, formAction, pending] = useActionState(checkoutAction, null) //react 19 hook
-    console.log(state)
+    const { pending } = useFormStatus() //react 19 hook
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<CheckOutValidationSchema>({
         resolver: zodResolver(checkOutValidationSchema)
     })
     useEffect(() => { //for initial run or user is change which is rare case
-        console.log("sdsdqd");
-
         if (user) { //if user value is available 
             setValue('firstname', user?.firstName || "")
             setValue('lastname', user?.lastName || "")
             setValue('email', user?.emailAddresses[0].emailAddress || "")
         }
     }, [user, setValue])
+    console.log(pending);
+
 
     const customSubmit = async (data: CheckOutValidationSchema) => {
-        startTransition(() => {
-            formAction(data)
+        // console.log(data);
 
-        })
+        checkoutAction(data)
     }
 
     return (
@@ -146,12 +146,9 @@ export default function CheckoutForm() {
                 {/* Right Column - Order Summary */}
                 <div className="bg-gray-100 p-6 rounded-lg">
                     <CheckoutSummary />
-                    <button
-                        type="submit"
-                        className="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-                    >
+                    <Button variant={'btnSecondary'} className="w-full mt-6 text-white py-2 rounded-lg">
                         Place Order
-                    </button>
+                    </Button>
                 </div>
             </form>
             <DialogLoader isOpen={pending} />

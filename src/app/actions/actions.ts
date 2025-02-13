@@ -1,9 +1,11 @@
 "use server";
 
+// import { client } from "@/sanity/lib/client";
 import { CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";
 
-export async function checkoutAction(prevState: unknown, formData: CheckOutValidationSchema) {
-    console.log(prevState, formData);
+export async function checkoutAction(formData: CheckOutValidationSchema) {
+    console.log(formData);
+
 
 
 }
