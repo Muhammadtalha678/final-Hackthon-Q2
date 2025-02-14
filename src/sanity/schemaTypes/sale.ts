@@ -43,7 +43,7 @@ export default {
             title: "Delivery Address",
             fields: [
                 { name: "name", type: "string", title: "Name" },
-                { name: "addressLine1", type: "string", title: "Address Line 1" },
+                { name: "address", type: "string", title: "Address" },
                 { name: "city", type: "string", title: "City" },
                 { name: "country", type: "string", title: "Country" },
             ],
