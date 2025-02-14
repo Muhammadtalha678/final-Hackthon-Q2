@@ -46,6 +46,7 @@ export default {
                 { name: "address", type: "string", title: "Address" },
                 { name: "city", type: "string", title: "City" },
                 { name: "country", type: "string", title: "Country" },
+                { name: "zipcode", type: "string", title: "Zip Code" },
             ],
         },
     ],
