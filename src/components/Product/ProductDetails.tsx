@@ -110,10 +110,17 @@ export default function ProductDetailsComp({ ProductDetail }: { ProductDetail: P
                         <span className="px-4">1</span>
                         <button className="px-3 py-2">+</button>
                     </div> */}
-                    <button className={`px-6 py-3 border rounded-lg ${addedToCart ? 'bg-yellow-600' : ''}`}
-                        disabled={addedToCart} onClick={() => handleCart(ProductDetail)}>
-                        Add To Cart
-                    </button>
+                    {
+                        ProductDetail.stock > 0 ?
+                            <button className={`px-6 py-3 border rounded-lg ${addedToCart ? 'bg-yellow-600' : ''}`}
+                                disabled={addedToCart} onClick={() => handleCart(ProductDetail)}>
+                                Add To Cart
+                            </button> :
+                            <button className={`text-white bg-[#B88E2F] px-4 py-2 text-sm rounded-md font-semibold`} disabled={true}>
+                                Out of Stock
+                            </button>
+
+                    }
                     <button className="px-6 py-3 border rounded-lg">+ Compare</button>
                 </div>
 

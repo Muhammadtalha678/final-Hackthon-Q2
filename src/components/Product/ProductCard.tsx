@@ -54,6 +54,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       setAddedToWishList(true)
     }
   }, [wishList])
+  console.log(product.stock);
 
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
@@ -84,10 +85,16 @@ const ProductCard = ({ product }: { product: Product }) => {
       <Link href={`/shop/${product._id}`}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 
+          {
+            product.stock > 0 ?
+              <button className={`${addedToCart ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart} disabled={addedToCart}>
+                {addedToCart ? "Added" : "Add to cart"}
+              </button> :
+              <button className={`text-white bg-[#B88E2F] px-4 py-2 text-sm rounded-md font-semibold`} disabled={true}>
+                Out of Stock
+              </button>
 
-          <button className={`${addedToCart ? 'text-white bg-[#B88E2F]' : 'bg-white text-black'} px-4 py-2 text-sm rounded-md font-semibold`} onClick={handleCart} disabled={addedToCart}>
-            {addedToCart ? "Added" : "Add to cart"}
-          </button>
+          }
 
 
 
