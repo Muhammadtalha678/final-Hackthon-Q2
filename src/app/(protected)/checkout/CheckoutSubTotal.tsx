@@ -48,12 +48,12 @@ export default function CheckoutSummary() {
                 <div className="space-y-2">
                     <label className="flex items-center space-x-2">
                         <input type="radio" name="payment" className="w-4 h-4" />
-                        <span>Direct Bank Transfer</span>
+                        {/* <span>Direct Bank Transfer</span> */}
                     </label>
-                    <p className="text-sm text-gray-600">
+                    {/* <p className="text-sm text-gray-600">
                         Make your payment directly into our bank account. Please use your Order ID as the payment reference.
                         Your order will not be shipped until the funds have cleared in our account.
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>
