@@ -1,18 +1,8 @@
-'use client'
 
 import { CheckIcon } from "lucide-react";
 import Link from "next/link";
-import { useCart } from '@/context/CartContext'
-import { useEffect } from "react";
+
 export default function PaymentSuccessDialog() {
-    const { emptyCart } = useCart()
-    useEffect(() => {
-        console.log("Running emptyCart effect");
-        console.log("Current domain:", window.location.origin);
-        console.log("Cart before clear:", localStorage.getItem("cart"));
-        emptyCart();
-        console.log("Cart after clear:", localStorage.getItem("cart"));
-    }, []);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
