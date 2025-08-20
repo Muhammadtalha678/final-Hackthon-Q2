@@ -38,6 +38,15 @@ export default {
             },
         },
         {
+            name: "deliveryStatus",
+            type: "string",
+            title: "Delivery Status",
+            options: {
+                list: ["pending", "processing", "shipped", "delivered", "cancelled", "returned"], // Dropdown options
+            },
+
+        },
+        {
             name: "deliveryAddress",
             type: "object",
             title: "Delivery Address",
