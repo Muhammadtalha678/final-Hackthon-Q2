@@ -31,11 +31,11 @@ export default function PaymentSuccessDialog() {
                     >
                         Continue Shopping
                     </Link>
-                    <button
+                    <Link href={'/order-details'}
                         className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
                     >
                         Order details
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
