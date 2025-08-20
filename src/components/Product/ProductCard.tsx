@@ -54,7 +54,6 @@ const ProductCard = ({ product }: { product: Product }) => {
       setAddedToWishList(true)
     }
   }, [wishList])
-  console.log(product.stock);
 
   return (
     <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg">
