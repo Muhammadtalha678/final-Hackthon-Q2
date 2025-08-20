@@ -52,7 +52,7 @@ export const checkOutValidationSchema = z.object({
         }),
 
     product_detail: z.array(
-        z.object({ productId: z.number(), productName: z.string(), productPrice: z.number(), quantity_sold: z.number() })
+        z.object({ productId: z.string(), productName: z.string(), productPrice: z.number(), quantity_sold: z.number(), _key: z.string() })
     ),
 
     sales_price: z.number({ message: "Total Sale is required" })
