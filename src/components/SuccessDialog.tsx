@@ -7,8 +7,13 @@ import { useEffect } from "react";
 export default function PaymentSuccessDialog() {
     const { emptyCart } = useCart()
     useEffect(() => {
-        emptyCart()
+        console.log("Running emptyCart effect");
+        console.log("Current domain:", window.location.origin);
+        console.log("Cart before clear:", localStorage.getItem("cart"));
+        emptyCart();
+        console.log("Cart after clear:", localStorage.getItem("cart"));
     }, []);
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">

@@ -1,5 +1,5 @@
 import React from 'react'
-import SuccessDialog from "../../../components/SuccessDialog"
+import SuccessDialog from "../../components/SuccessDialog"
 
 const PaymentSuccess = () => {
     return (
