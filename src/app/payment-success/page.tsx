@@ -7,11 +7,12 @@ interface Props {
 }
 
 // This is a server component, no 'use client'
-const PaymentSuccess = ({ searchParams }: Props) => {
-    const session_id = searchParams?.session_id;
+const PaymentSuccess = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
+    const searchParam = await searchParams
+    const sessionId = await searchParam.session_id
 
     // redirect if session_id missing
-    if (!session_id) {
+    if (!sessionId) {
         redirect("/cart");
     }
 
