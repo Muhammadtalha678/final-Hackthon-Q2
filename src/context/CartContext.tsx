@@ -74,8 +74,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
             const filterCart = cart.filter((e) => e.productId !== id)
             console.log(filterCart);
 
-            setCart([])
-            // localStorage.removeItem('cart')
+            setCart(filterCart)
 
         }
     }
@@ -84,6 +83,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const emptyCart = () => {
         setCart([])
+        localStorage.removeItem('cart')
     }
 
     return (
