@@ -32,7 +32,7 @@ export default function PaymentSuccessDialog() {
                         Continue Shopping
                     </Link>
                     <Link href={'/order-details'}
-                        className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                        className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-center"
                     >
                         Order details
                     </Link>
