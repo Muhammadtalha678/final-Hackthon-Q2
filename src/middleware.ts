@@ -4,7 +4,7 @@ import { } from '@clerk/nextjs'
 import { client } from "./sanity/lib/client";
 
 // define route for protected and admin route 
-const isProtectedRoutes = createRouteMatcher(['/shipment', '/cart', '/checkout', '/admin/:path*'])
+const isProtectedRoutes = createRouteMatcher(['/shipment', '/cart', '/checkout', '/order-details', '/admin/:path*'])
 const isAdminRoute = createRouteMatcher('/admin/:path*')
 
 export default clerkMiddleware(async (auth, req) => {
@@ -58,6 +58,7 @@ export const config = {
         "/shipment",
         "/cart",
         "/checkout",
+        "/order-details",
         '/api/(.*)', // Always run for API routes
     ],
 };
