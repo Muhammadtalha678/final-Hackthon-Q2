@@ -48,10 +48,6 @@ export default function CheckoutForm() {
 
 
     const customSubmit = async (checkoutData: CheckOutValidationSchema) => {
-        // startTransition(() => {
-
-        //     formAction(data)
-        // })
         try {
             setPending(true)
             const res = await fetch("/api/payment-intent", {
@@ -82,9 +78,6 @@ export default function CheckoutForm() {
     }
 
     return (
-        // state?.message && !state.error ?
-        //     <SuccessDialog />
-        //     :
         <div>
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
             <form onSubmit={handleSubmit(customSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -209,7 +202,6 @@ export default function CheckoutForm() {
                 </div>
             </form>
             <DialogLoader isOpen={pending} />
-            {/* <p>{state?.message}</p> */}
         </div>
     );
 }
