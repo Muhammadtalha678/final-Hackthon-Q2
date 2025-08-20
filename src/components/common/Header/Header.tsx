@@ -16,7 +16,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { cart } = useCart()
   const { wishList } = useWishList()
-
   return (
     <header className="w-full bg-white overflow-x-hidden">
       {/* Main Navbar */}
@@ -59,6 +58,14 @@ const Navbar = () => {
               </Link>
             ))
           }
+          <SignedIn>
+            <Link
+              href="/order-details"
+              className={`${pathname === '/order-details' ? 'text-[#e6b477]' : 'text-gray-800 hover:text-[#e6b477]'}`}
+            >
+              Orders
+            </Link>
+          </SignedIn>
         </nav>
 
         {/* Icons (Desktop) */}
@@ -115,7 +122,17 @@ const Navbar = () => {
                 {nav.name}
               </Link>
             ))
+
           }
+          <SignedIn>
+            <Link
+              href="/order-details"
+              // className={`${pathname === '/order-details' ? 'text-[#e6b477]' : 'text-gray-800 hover:text-[#e6b477]'}`}
+              className={`block ${pathname === '/order-details' ? 'text-[#e6b477]' : 'text-gray-800 hover:text-[#e6b477]'}`}
+            >
+              Orders
+            </Link>
+          </SignedIn>
 
           {/* Mobile Icons */}
           <div className="flex space-x-6 mt-4 justify-center">
