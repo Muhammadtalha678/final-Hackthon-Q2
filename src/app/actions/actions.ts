@@ -1,6 +1,5 @@
 "use server";
 
-import { Product } from "@/interfaces/Product";
 import { client } from "@/sanity/lib/client";
 // import { client } from "@/sanity/lib/client";
 import { CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";

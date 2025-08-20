@@ -1,7 +1,7 @@
 import { CheckIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function PaymentSuccessDialog({ isOpen, onClose }: { isOpen?: boolean, onClose?: () => void }) {
+export default function PaymentSuccessDialog() {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -22,13 +22,11 @@ export default function PaymentSuccessDialog({ isOpen, onClose }: { isOpen?: boo
                 <div className="flex space-x-4 mt-6">
                     <Link href={'/shop'}
                         className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 text-center"
-                    // onClick={onClose}
                     >
                         Continue Shopping
                     </Link>
                     <button
                         className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-                        onClick={onClose}
                     >
                         Order details
                     </button>

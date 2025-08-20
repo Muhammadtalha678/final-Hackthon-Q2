@@ -1,6 +1,5 @@
 
 import { client } from "@/sanity/lib/client";
-import { CheckOutValidationSchema } from "@/utils/validations/checkoutValidation";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -14,8 +13,9 @@ export async function POST(req: NextRequest) {
     try {
         event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
 
-    } catch (err: any) {
-        console.error("Webhook signature verification failed:", err.message);
+    } catch (err: unknown) {
+        if (err instanceof Error)
+            console.error("Webhook signature verification failed:", err.message);
         return NextResponse.json({ body: { error: "Invalid signature" }, status: 400 });
     }
     console.log(event.type);
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
                 const sale = await client.fetch(`*[_type == 'sales' && _id == $id][0]`, { id: orderId })
 
                 if (sale.product_detail?.length) {
-                    sale.product_detail?.map(async (item: any) => {
+                    sale.product_detail?.map(async (item: { productId: string; quantity_sold: number; }) => {
                         const productData = await client.fetch(`*[_type == 'products' && _id == $id][0]`, { id: item.productId })
                         if (productData?.stock !== undefined) {
                             const stockUpdate = productData.stock - item.quantity_sold
