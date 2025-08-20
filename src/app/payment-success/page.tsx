@@ -2,9 +2,7 @@
 import SuccessDialog from "@/components/SuccessDialog";
 import { redirect } from "next/navigation";
 
-interface Props {
-    searchParams?: { session_id?: string };
-}
+
 
 // This is a server component, no 'use client'
 const PaymentSuccess = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
