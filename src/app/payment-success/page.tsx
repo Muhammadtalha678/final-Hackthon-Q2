@@ -5,10 +5,10 @@ import { redirect } from 'next/navigation';
 interface Props {
     searchParams: { session_id?: string };
 }
-const PaymentSuccess = ({ searchParams }: Props) => {
-    const sessionId = searchParams.session_id
+const PaymentSuccess = async ({ searchParams }: { searchParams: Promise<Props> }) => {
+    const { session_id } = (await searchParams).searchParams
 
-    if (!sessionId) {
+    if (!session_id) {
         redirect('/cart')
     }
     return (
