@@ -34,7 +34,7 @@ export default {
             type: "string",
             title: "Payment Status",
             options: {
-                list: ["Cash on delivery", "Paid", "Failed"], // Dropdown options
+                list: ["Cash on delivery", "Paid", "Failed", "pending"], // Dropdown options
             },
         },
         {
